@@ -1,0 +1,59 @@
+version: "1.0"
+title: "Education indicators dashboard"
+purpose: "Comparar indicadores educativos por entidad y periodo sin inferir causalidad."
+audience:
+  - data analyst
+  - planeacion
+  - lector de portafolio
+filters:
+  - id: indicator
+    label: Indicador
+    required: true
+    allowed: [EDU-SCHOOLING-MEAN, EDU-ATTENDANCE-RATE, EDU-LITERACY-RATE, EDU-COVERAGE-RATE]
+  - id: entity
+    label: Entidad
+    required: false
+    behavior: "Una entidad o todas las entidades disponibles."
+  - id: period
+    label: Periodo
+    required: true
+    behavior: "Solo periodos presentes en el indicador seleccionado."
+metrics:
+  - id: latest_value
+    label: Ultimo valor
+    source: value
+  - id: period_change
+    label: Cambio porcentual
+    source: percent_change
+    rule: "Mostrar N/D si no existe periodo anterior o si el anterior es cero."
+  - id: observations
+    label: Observaciones
+    source: "count(value)"
+visualizations:
+  - id: time_series
+    type: bar
+    title: Serie temporal
+    x: time_period
+    y: value
+    rule: "No mezclar indicadores ni unidades en una misma escala."
+  - id: entity_ranking
+    type: horizontal_bar
+    title: Ranking territorial
+    x: value
+    y: geo_name
+    rule: "Orden descendente; indicar periodo seleccionado."
+  - id: relationship_note
+    type: annotation
+    title: Lectura metodologica
+    rule: "Toda relacion entre indicadores se presenta como descriptiva, no causal."
+states:
+  empty: "No hay observaciones para los filtros seleccionados."
+  incomplete: "La cobertura disponible no permite una comparacion completa."
+  synthetic: "Datos sinteticos para demostracion; no representan cifras oficiales."
+accessibility:
+  - "Cada control tiene label visible y aria-label cuando sea necesario."
+  - "El color no es el unico canal para comunicar estados."
+  - "Los graficos incluyen titulo, periodo y unidad."
+responsive:
+  desktop: "Tres metricas en fila; visualizaciones en dos columnas."
+  mobile: "Una columna; filtros y visualizaciones apilados."

@@ -1,0 +1,72 @@
+project_id: PROJECT-02
+name: education-dashboard
+status: scoped
+bounded_context: education
+objective: Explorar indicadores educativos por entidad y periodo.
+audience:
+  - analistas de datos
+  - equipos de planeacion
+  - lectores de portafolio tecnico
+questions:
+  - Como cambia el grado promedio de escolaridad por entidad y periodo?
+  - Que entidades presentan mayor y menor cobertura educativa?
+  - Que brechas descriptivas existen entre entidades?
+  - Como se relacionan cobertura, asistencia y escolaridad en el mismo periodo?
+in_scope:
+  - grado promedio de escolaridad
+  - asistencia escolar
+  - alfabetizacion
+  - cobertura educativa
+  - entidad federativa
+  - periodo
+  - comparacion descriptiva territorial
+  - brechas y variaciones derivadas
+  - EDA reproducible
+  - dashboard filtrable
+out_of_scope:
+  - prediccion de logro educativo
+  - causalidad
+  - datos individuales
+  - publicacion de datos reales
+  - evaluacion de escuelas particulares
+  - recomendaciones de politica publica
+  - inferencia estadistica sin metodologia aprobada
+indicators:
+  - id: education_schooling_mean
+    name: grado promedio de escolaridad
+    unit: years
+  - id: education_attendance_rate
+    name: tasa de asistencia escolar
+    unit: percent
+  - id: education_literacy_rate
+    name: tasa de alfabetizacion
+    unit: percent
+  - id: education_coverage_rate
+    name: tasa de cobertura educativa
+    unit: percent
+dimensions:
+  - entity
+  - period
+  - indicator
+  - unit
+tools:
+  - Python
+  - pandas
+  - NumPy
+  - SQLite
+  - SQL
+  - HTML5
+  - CSS3
+  - JavaScript
+  - pytest
+  - Playwright
+  - GitHub Actions
+acceptance:
+  - metadatos y unidad visibles
+  - fuente y fecha documentadas
+  - dashboard reproducible
+  - contrato de datos validado
+  - EDA con brechas, variaciones y limitaciones
+  - consultas SQL reproducibles
+  - pruebas unitarias, integracion, smoke y E2E
+  - PDF sanitizado disponible

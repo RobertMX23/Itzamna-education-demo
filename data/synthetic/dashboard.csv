@@ -1,0 +1,61 @@
+indicator_id,indicator_name,unit,geo_area,geo_name,time_period,value,status,absolute_change,percent_change,rank,territorial_gap,segment,gap_from_max,gap_from_max_percent
+EDU-ATTENDANCE-RATE,Tasa de asistencia escolar,percent,01,Entidad Norte,2016,94.0,observed,,,1,12.0,,,
+EDU-ATTENDANCE-RATE,Tasa de asistencia escolar,percent,01,Entidad Norte,2017,94.5,observed,0.5,0.5319148936170213,1,11.700000000000003,,,
+EDU-ATTENDANCE-RATE,Tasa de asistencia escolar,percent,01,Entidad Norte,2018,95.0,observed,0.5,0.5291005291005291,1,11.5,,,
+EDU-ATTENDANCE-RATE,Tasa de asistencia escolar,percent,01,Entidad Norte,2019,95.3,observed,0.29999999999999716,0.3157894736842075,1,11.200000000000003,,,
+EDU-ATTENDANCE-RATE,Tasa de asistencia escolar,percent,01,Entidad Norte,2020,94.8,estimated,-0.5,-0.5246589716684156,1,11.599999999999994,high,0.0,0.0
+EDU-ATTENDANCE-RATE,Tasa de asistencia escolar,percent,02,Entidad Centro,2016,89.0,observed,,,2,12.0,,,
+EDU-ATTENDANCE-RATE,Tasa de asistencia escolar,percent,02,Entidad Centro,2017,89.6,observed,0.5999999999999943,0.6741573033707802,2,11.700000000000003,,,
+EDU-ATTENDANCE-RATE,Tasa de asistencia escolar,percent,02,Entidad Centro,2018,90.2,observed,0.6000000000000085,0.6696428571428668,2,11.5,,,
+EDU-ATTENDANCE-RATE,Tasa de asistencia escolar,percent,02,Entidad Centro,2019,90.8,observed,0.5999999999999943,0.6651884700665125,2,11.200000000000003,,,
+EDU-ATTENDANCE-RATE,Tasa de asistencia escolar,percent,02,Entidad Centro,2020,89.9,estimated,-0.8999999999999915,-0.991189427312766,2,11.599999999999994,middle,4.8999999999999915,5.168776371308008
+EDU-ATTENDANCE-RATE,Tasa de asistencia escolar,percent,03,Entidad Sur,2016,82.0,observed,,,3,12.0,,,
+EDU-ATTENDANCE-RATE,Tasa de asistencia escolar,percent,03,Entidad Sur,2017,82.8,observed,0.7999999999999972,0.9756097560975575,3,11.700000000000003,,,
+EDU-ATTENDANCE-RATE,Tasa de asistencia escolar,percent,03,Entidad Sur,2018,83.5,observed,0.7000000000000028,0.8454106280193271,3,11.5,,,
+EDU-ATTENDANCE-RATE,Tasa de asistencia escolar,percent,03,Entidad Sur,2019,84.1,observed,0.5999999999999943,0.7185628742514902,3,11.200000000000003,,,
+EDU-ATTENDANCE-RATE,Tasa de asistencia escolar,percent,03,Entidad Sur,2020,83.2,estimated,-0.8999999999999915,-1.070154577883462,3,11.599999999999994,low,11.599999999999994,12.236286919831219
+EDU-COVERAGE-RATE,Tasa de cobertura educativa,percent,01,Entidad Norte,2016,91.0,observed,,,1,15.0,,,
+EDU-COVERAGE-RATE,Tasa de cobertura educativa,percent,01,Entidad Norte,2017,91.5,observed,0.5,0.5494505494505495,1,14.700000000000003,,,
+EDU-COVERAGE-RATE,Tasa de cobertura educativa,percent,01,Entidad Norte,2018,92.0,observed,0.5,0.546448087431694,1,14.400000000000006,,,
+EDU-COVERAGE-RATE,Tasa de cobertura educativa,percent,01,Entidad Norte,2019,92.4,observed,0.4000000000000057,0.4347826086956583,1,14.100000000000009,,,
+EDU-COVERAGE-RATE,Tasa de cobertura educativa,percent,01,Entidad Norte,2020,91.8,estimated,-0.6000000000000085,-0.6493506493506584,1,14.299999999999997,high,0.0,0.0
+EDU-COVERAGE-RATE,Tasa de cobertura educativa,percent,02,Entidad Centro,2016,84.0,observed,,,2,15.0,,,
+EDU-COVERAGE-RATE,Tasa de cobertura educativa,percent,02,Entidad Centro,2017,84.7,observed,0.7000000000000028,0.8333333333333368,2,14.700000000000003,,,
+EDU-COVERAGE-RATE,Tasa de cobertura educativa,percent,02,Entidad Centro,2018,85.4,observed,0.7000000000000028,0.8264462809917389,2,14.400000000000006,,,
+EDU-COVERAGE-RATE,Tasa de cobertura educativa,percent,02,Entidad Centro,2019,86.0,observed,0.5999999999999943,0.7025761124121713,2,14.100000000000009,,,
+EDU-COVERAGE-RATE,Tasa de cobertura educativa,percent,02,Entidad Centro,2020,85.2,estimated,-0.7999999999999972,-0.9302325581395315,2,14.299999999999997,middle,6.599999999999994,7.189542483660125
+EDU-COVERAGE-RATE,Tasa de cobertura educativa,percent,03,Entidad Sur,2016,76.0,observed,,,3,15.0,,,
+EDU-COVERAGE-RATE,Tasa de cobertura educativa,percent,03,Entidad Sur,2017,76.8,observed,0.7999999999999972,1.0526315789473648,3,14.700000000000003,,,
+EDU-COVERAGE-RATE,Tasa de cobertura educativa,percent,03,Entidad Sur,2018,77.6,observed,0.7999999999999972,1.041666666666663,3,14.400000000000006,,,
+EDU-COVERAGE-RATE,Tasa de cobertura educativa,percent,03,Entidad Sur,2019,78.3,observed,0.7000000000000028,0.9020618556701068,3,14.100000000000009,,,
+EDU-COVERAGE-RATE,Tasa de cobertura educativa,percent,03,Entidad Sur,2020,77.5,estimated,-0.7999999999999972,-1.0217113665389492,3,14.299999999999997,low,14.299999999999997,15.577342047930282
+EDU-LITERACY-RATE,Tasa de alfabetizacion,percent,01,Entidad Norte,2016,97.0,observed,,,1,10.0,,,
+EDU-LITERACY-RATE,Tasa de alfabetizacion,percent,01,Entidad Norte,2017,97.2,observed,0.20000000000000284,0.20618556701031218,1,9.700000000000003,,,
+EDU-LITERACY-RATE,Tasa de alfabetizacion,percent,01,Entidad Norte,2018,97.4,observed,0.20000000000000284,0.2057613168724309,1,9.400000000000006,,,
+EDU-LITERACY-RATE,Tasa de alfabetizacion,percent,01,Entidad Norte,2019,97.6,observed,0.19999999999998863,0.2053388090348959,1,9.099999999999994,,,
+EDU-LITERACY-RATE,Tasa de alfabetizacion,percent,01,Entidad Norte,2020,97.8,observed,0.20000000000000284,0.20491803278688817,1,8.799999999999997,high,0.0,0.0
+EDU-LITERACY-RATE,Tasa de alfabetizacion,percent,02,Entidad Centro,2016,93.0,observed,,,2,10.0,,,
+EDU-LITERACY-RATE,Tasa de alfabetizacion,percent,02,Entidad Centro,2017,93.3,observed,0.29999999999999716,0.32258064516128726,2,9.700000000000003,,,
+EDU-LITERACY-RATE,Tasa de alfabetizacion,percent,02,Entidad Centro,2018,93.6,observed,0.29999999999999716,0.32154340836012557,2,9.400000000000006,,,
+EDU-LITERACY-RATE,Tasa de alfabetizacion,percent,02,Entidad Centro,2019,93.9,observed,0.30000000000001137,0.3205128205128327,2,9.099999999999994,,,
+EDU-LITERACY-RATE,Tasa de alfabetizacion,percent,02,Entidad Centro,2020,94.2,observed,0.29999999999999716,0.31948881789137074,2,8.799999999999997,middle,3.5999999999999943,3.6809815950920184
+EDU-LITERACY-RATE,Tasa de alfabetizacion,percent,03,Entidad Sur,2016,87.0,observed,,,3,10.0,,,
+EDU-LITERACY-RATE,Tasa de alfabetizacion,percent,03,Entidad Sur,2017,87.5,observed,0.5,0.5747126436781609,3,9.700000000000003,,,
+EDU-LITERACY-RATE,Tasa de alfabetizacion,percent,03,Entidad Sur,2018,88.0,observed,0.5,0.5714285714285714,3,9.400000000000006,,,
+EDU-LITERACY-RATE,Tasa de alfabetizacion,percent,03,Entidad Sur,2019,88.5,observed,0.5,0.5681818181818182,3,9.099999999999994,,,
+EDU-LITERACY-RATE,Tasa de alfabetizacion,percent,03,Entidad Sur,2020,89.0,observed,0.5,0.5649717514124294,3,8.799999999999997,low,8.799999999999997,8.997955010224947
+EDU-SCHOOLING-MEAN,Grado promedio de escolaridad,years,01,Entidad Norte,2016,10.8,observed,,,1,2.6000000000000014,,,
+EDU-SCHOOLING-MEAN,Grado promedio de escolaridad,years,01,Entidad Norte,2017,11.0,observed,0.1999999999999993,1.8518518518518452,1,2.6999999999999993,,,
+EDU-SCHOOLING-MEAN,Grado promedio de escolaridad,years,01,Entidad Norte,2018,11.2,observed,0.1999999999999993,1.818181818181812,1,2.6999999999999993,,,
+EDU-SCHOOLING-MEAN,Grado promedio de escolaridad,years,01,Entidad Norte,2019,11.4,observed,0.20000000000000107,1.7857142857142954,1,2.8000000000000007,,,
+EDU-SCHOOLING-MEAN,Grado promedio de escolaridad,years,01,Entidad Norte,2020,11.6,observed,0.1999999999999993,1.7543859649122744,1,2.799999999999999,high,0.0,0.0
+EDU-SCHOOLING-MEAN,Grado promedio de escolaridad,years,02,Entidad Centro,2016,9.4,observed,,,2,2.6000000000000014,,,
+EDU-SCHOOLING-MEAN,Grado promedio de escolaridad,years,02,Entidad Centro,2017,9.5,observed,0.09999999999999964,1.0638297872340388,2,2.6999999999999993,,,
+EDU-SCHOOLING-MEAN,Grado promedio de escolaridad,years,02,Entidad Centro,2018,9.7,observed,0.1999999999999993,2.1052631578947296,2,2.6999999999999993,,,
+EDU-SCHOOLING-MEAN,Grado promedio de escolaridad,years,02,Entidad Centro,2019,9.8,observed,0.10000000000000142,1.0309278350515612,2,2.8000000000000007,,,
+EDU-SCHOOLING-MEAN,Grado promedio de escolaridad,years,02,Entidad Centro,2020,10.0,observed,0.1999999999999993,2.0408163265306047,2,2.799999999999999,middle,1.5999999999999996,13.79310344827586
+EDU-SCHOOLING-MEAN,Grado promedio de escolaridad,years,03,Entidad Sur,2016,8.2,observed,,,3,2.6000000000000014,,,
+EDU-SCHOOLING-MEAN,Grado promedio de escolaridad,years,03,Entidad Sur,2017,8.3,observed,0.10000000000000142,1.2195121951219685,3,2.6999999999999993,,,
+EDU-SCHOOLING-MEAN,Grado promedio de escolaridad,years,03,Entidad Sur,2018,8.5,observed,0.1999999999999993,2.4096385542168584,3,2.6999999999999993,,,
+EDU-SCHOOLING-MEAN,Grado promedio de escolaridad,years,03,Entidad Sur,2019,8.6,observed,0.09999999999999964,1.17647058823529,3,2.8000000000000007,,,
+EDU-SCHOOLING-MEAN,Grado promedio de escolaridad,years,03,Entidad Sur,2020,8.8,observed,0.20000000000000107,2.32558139534885,3,2.799999999999999,low,2.799999999999999,24.13793103448275

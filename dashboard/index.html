@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Dashboard educativo descriptivo con datos sintéticos.">
+    <title>Education indicators dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="page-header">
+        <p class="eyebrow">ITZAMNA / PROJECT 02</p>
+        <h1>Education dashboard</h1>
+        <p class="lede">Compara indicadores educativos por entidad y periodo.</p>
+        <p class="notice">Datos sintéticos para demostración. No representan cifras oficiales.</p>
+      </header>
+
+      <section class="toolbar" aria-label="Filtros del dashboard">
+        <label>Indicador
+          <select id="indicator-filter" aria-label="Seleccionar indicador"></select>
+        </label>
+        <label>Entidad
+          <select id="entity-filter" aria-label="Seleccionar entidad"></select>
+        </label>
+        <label>Periodo
+          <select id="period-filter" aria-label="Seleccionar periodo"></select>
+        </label>
+      </section>
+
+      <section class="metrics" aria-label="Métricas principales">
+        <article><span>Último valor</span><strong id="latest-value">N/D</strong><small id="latest-period">-</small></article>
+        <article><span>Cambio porcentual</span><strong id="period-change">N/D</strong><small>vs. periodo anterior</small></article>
+        <article><span>Observaciones</span><strong id="observation-count">0</strong><small>en la selección</small></article>
+      </section>
+
+      <section class="visual-grid" aria-label="Visualizaciones educativas">
+        <article class="panel">
+          <div class="panel-heading"><h2>Serie temporal</h2><span id="series-range">-</span></div>
+          <div id="time-series" class="chart" role="img" aria-label="Serie temporal del indicador seleccionado"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-heading"><h2>Ranking territorial</h2><span id="ranking-period">-</span></div>
+          <ol id="entity-ranking" class="ranking"></ol>
+        </article>
+      </section>
+
+      <p id="status-message" class="status" role="status">Cargando datos...</p>
+      <footer>Lectura descriptiva. Las relaciones entre indicadores no implican causalidad.</footer>
+    </main>
+    <script src="app.js" defer></script>
+  </body>
+</html>

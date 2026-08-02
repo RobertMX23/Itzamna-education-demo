@@ -1,0 +1,42 @@
+{
+  "project_id": "PROJECT-02",
+  "name": "education-dashboard",
+  "release": "0.1.0",
+  "released_on": "2026-08-02",
+  "source_type": "synthetic",
+  "status": "accepted-for-next-iteration",
+  "artifacts": [
+    {
+      "path": "data/synthetic/catalog.json",
+      "sha256": "b3fb9d45ffd2a046e767b5ed2ebc8040e8f9040e7b8cda87e347ae2a8b315f2a"
+    },
+    {
+      "path": "data/synthetic/dashboard.csv",
+      "sha256": "d8ab4f6ef07a864e86e978a85217f11011295738955ce1964e5bd3e034128778"
+    },
+    {
+      "path": "dashboard/index.html",
+      "sha256": "dfd2401ad2b4f6b8a44a66eb6a7e3244f2d285a9e9415e46ea1a36f9a96d3dbc"
+    },
+    {
+      "path": "dashboard/styles.css",
+      "sha256": "94b3963b6adaf903c375c2711fc7a5146da5dca5b737769fb64ad20b2b57a959"
+    },
+    {
+      "path": "dashboard/app.js",
+      "sha256": "944f706c379c72d15b6e002b0894fc9c77b47fe0c315f4b658a418debef2c228"
+    },
+    {
+      "path": "docs/acceptance-checklist.md",
+      "sha256": "618805a2af063c7f8b46b3b0ac7cdde1d03b2eb289bd1cb31e899a41c5330301"
+    },
+    {
+      "path": "portfolio/case-study.md",
+      "sha256": "49ee0c3d0ff2654152fa67e85df53d4397d84f60bcb9ec1a050479d6f403928c"
+    }
+  ],
+  "security": {
+    "secrets_included": false,
+    "production_connection_included": false
+  }
+}
