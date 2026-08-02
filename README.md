@@ -27,10 +27,26 @@ causalidad ni como cifras oficiales.
 
 ## Demo
 
+- [Live portfolio page](https://robertmx23.github.io/Itzamna-education-demo/)
+- [Live dashboard](https://robertmx23.github.io/Itzamna-education-demo/dashboard/)
 - [Open dashboard](dashboard/index.html)
 - [Case study](portfolio/case-study.md)
 - [Release manifest](portfolio/release-manifest.json)
 - [Visual review](docs/visual-review.md)
+
+## Publication flow
+
+1. GitHub Pages is enabled with **GitHub Actions** as the publishing source.
+2. The `pages.yml` workflow packages the repository as a static artifact.
+3. The artifact is deployed to the `github-pages` environment.
+4. The root page redirects visitors to the dashboard.
+5. A reviewer can inspect the live page, the dashboard, the case study and
+   the release manifest independently.
+
+The publication boundary is intentional: this public repository contains the
+portfolio presentation and synthetic fixture only. The private INEGI
+integration, credentials, operational files and production data remain
+outside this repository.
 
 ## Safety boundary
 
