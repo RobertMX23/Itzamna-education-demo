@@ -4,6 +4,27 @@ Public portfolio demo of an educational indicators dashboard built with
 synthetic data. It demonstrates data preparation, descriptive metrics,
 validation, responsive HTML/CSS and CI-oriented quality controls.
 
+## Portfolio description
+
+Este portfolio muestra un flujo completo de analisis descriptivo para
+indicadores educativos: desde la definicion del contrato y la preparacion de
+observaciones sinteticas hasta la construccion de metricas, comparaciones
+territoriales y una interfaz web reproducible. El dashboard permite explorar
+indicadores por entidad y periodo, leer cambios interperiodo y revisar un
+ranking territorial sin perder el contexto de unidad, cobertura y limites
+metodologicos.
+
+La pieza demuestra habilidades de nivel intermedio inicial en analisis de
+datos: estructuracion de datasets, validacion de calidad, calculo de metricas,
+documentacion, visualizacion y automatizacion de verificaciones. La separacion
+entre datos, analisis, dashboard y evidencia facilita revisar cada decision y
+reutilizar el flujo en futuros proyectos.
+
+Este repositorio es una demostracion publica y segura. Utiliza datos
+sinteticos, no contiene secretos ni depende de una conexion productiva con
+INEGI. Las conclusiones son descriptivas y no deben interpretarse como
+causalidad ni como cifras oficiales.
+
 ## Demo
 
 - [Open dashboard](dashboard/index.html)
