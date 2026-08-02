@@ -56,6 +56,35 @@ function buildRanking(rows, period) {
     .map((row, index) => ({ ...row, calculatedRank: index + 1 }));
 }
 
+function renderMetadata(rows) {
+  const first = rows[0];
+  const entities = new Set(rows.map((row) => row.geo_area));
+  $("indicator-unit").textContent = first?.unit || "N/D";
+  $("data-status").textContent = first?.status || "N/D";
+  $("data-coverage").textContent = `${entities.size} entidad(es)`;
+}
+
+function renderObservationTable(rows) {
+  $("table-summary").textContent = `${rows.length} observacion(es)`;
+  $("observation-table").innerHTML = rows.map((row) => `<tr><td>${row.geo_name || "Agregado"}</td><td>${row.time_period}</td><td>${formatValue(row.value, row.unit)}</td><td>${row.percent_change ? `${Number(row.percent_change).toFixed(2)}%` : "N/D"}</td><td>${row.status || "N/D"}</td></tr>`).join("");
+}
+
+function renderHeatmap(rows) {
+  const entities = [...new Set(rows.map((row) => row.geo_name))];
+  const periods = [...new Set(rows.map((row) => row.time_period))].sort();
+  const header = `<div class="heatmap-row heatmap-header"><span>Entidad</span>${periods.map((period) => `<span>${period}</span>`).join("")}</div>`;
+  const body = entities.map((entity) => {
+    const cells = periods.map((period) => {
+      const row = rows.find((item) => item.geo_name === entity && item.time_period === period);
+      const change = row?.percent_change ? Number(row.percent_change) : 0;
+      const tone = change > 0 ? "positive" : change < 0 ? "negative" : "neutral";
+      return `<span class="heat-cell ${tone}" title="${row ? `${entity}, ${period}: ${change.toFixed(2)}%` : "Sin dato"}">${row ? `${change.toFixed(1)}%` : "-"}</span>`;
+    }).join("");
+    return `<div class="heatmap-row"><strong>${entity}</strong>${cells}</div>`;
+  }).join("");
+  $("growth-heatmap").innerHTML = header + body;
+}
+
 function populateControls(rows) {
   const indicators = [...new Map(rows.map((row) => [row.indicator_id, row])).values()];
   const entities = [...new Map(rows.map((row) => [row.geo_area, row])).values()];
@@ -88,6 +117,9 @@ function render() {
   $("time-series").innerHTML = rows.map((row) => `<div class="bar-item"><div class="bar" style="height:${Number(row.value) / max * 88}%" title="${formatValue(row.value, row.unit)}"></div><span class="bar-label">${row.time_period}</span></div>`).join("");
   const ranking = buildRanking(state.rows, state.period);
   $("entity-ranking").innerHTML = ranking.map((row) => `<li><span>${row.geo_name}</span><strong>${formatValue(row.value, row.unit)}</strong></li>`).join("");
+  renderMetadata(filteredRows);
+  renderObservationTable(filteredRows);
+  renderHeatmap(filterByIndicator(state.rows, state.indicatorId));
   $("status-message").textContent = rows.length ? "Datos sintéticos cargados correctamente." : "No hay observaciones para los filtros seleccionados.";
 }
 

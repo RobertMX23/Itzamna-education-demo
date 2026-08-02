@@ -34,6 +34,12 @@
         <article><span>Observaciones</span><strong id="observation-count">0</strong><small>en la selección</small></article>
       </section>
 
+      <section class="metadata" aria-label="Contexto del indicador">
+        <span>Unidad: <strong id="indicator-unit">-</strong></span>
+        <span>Estado: <strong id="data-status">-</strong></span>
+        <span>Cobertura: <strong id="data-coverage">-</strong></span>
+      </section>
+
       <section class="visual-grid" aria-label="Visualizaciones educativas">
         <article class="panel">
           <div class="panel-heading"><h2>Serie temporal</h2><span id="series-range">-</span></div>
@@ -43,6 +49,21 @@
           <div class="panel-heading"><h2>Ranking territorial</h2><span id="ranking-period">-</span></div>
           <ol id="entity-ranking" class="ranking"></ol>
         </article>
+      </section>
+
+      <section class="heatmap-panel panel" aria-label="Mapa de calor territorial">
+        <div class="panel-heading"><h2>Consistencia de crecimiento</h2><span>Variacion porcentual</span></div>
+        <div id="growth-heatmap" class="heatmap" role="img" aria-label="Mapa de calor de variaciones por entidad y periodo"></div>
+      </section>
+
+      <section class="data-table panel" aria-label="Detalle de observaciones">
+        <div class="panel-heading"><h2>Detalle de observaciones</h2><span id="table-summary">-</span></div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Entidad</th><th>Periodo</th><th>Valor</th><th>Variacion</th><th>Estado</th></tr></thead>
+            <tbody id="observation-table"></tbody>
+          </table>
+        </div>
       </section>
 
       <p id="status-message" class="status" role="status">Cargando datos...</p>

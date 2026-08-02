@@ -37,5 +37,20 @@ h2 { font-size: clamp(1.6rem, 3vw, 2.7rem); }
 .ranking li { display: flex; justify-content: space-between; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
 .ranking strong { white-space: nowrap; }
 .status { color: var(--muted); min-height: 1.5em; }
+.metadata { display: flex; flex-wrap: wrap; gap: 16px 28px; margin-top: 12px; color: var(--muted); font-size: .85rem; }
+.metadata strong { color: var(--ink); }
+.heatmap-panel, .data-table { margin-top: var(--space); }
+.heatmap { overflow-x: auto; padding-top: 18px; }
+.heatmap-row { display: grid; grid-template-columns: minmax(150px, 1.5fr) repeat(5, minmax(64px, 1fr)); gap: 4px; align-items: center; min-width: 500px; }
+.heatmap-row > * { padding: 8px; }
+.heatmap-header { color: var(--muted); font-size: .8rem; font-weight: 700; }
+.heat-cell { text-align: center; border: 1px solid var(--paper); font-size: .78rem; }
+.heat-cell.positive { background: #d9eadf; color: #245c45; }
+.heat-cell.negative { background: #f5d9d0; color: #8a3d2b; }
+.heat-cell.neutral { background: #edf1ef; color: var(--muted); }
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 620px; }
+th, td { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: left; }
+th { color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; }
 footer { border-top: 1px solid var(--line); color: var(--muted); margin-top: var(--space); padding-top: 16px; font-size: .85rem; }
 @media (max-width: 720px) { .page-header, .toolbar, .metrics, .visual-grid { grid-template-columns: 1fr; } .lede { max-width: none; } h1 { font-size: clamp(3rem, 16vw, 5rem); } }
