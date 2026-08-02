@@ -18,6 +18,15 @@ filters:
     label: Periodo
     required: true
     behavior: "Solo periodos presentes en el indicador seleccionado."
+analysis_modes:
+  individual:
+    label: "Entidad seleccionada"
+    dimensions: [indicator_id, geo_area, time_period]
+    metrics: [value, absolute_change, percent_change]
+  comparative:
+    label: "Comparacion territorial"
+    dimensions: [indicator_id, time_period, geo_area]
+    metrics: [value, rank, territorial_gap]
 metrics:
   - id: latest_value
     label: Ultimo valor

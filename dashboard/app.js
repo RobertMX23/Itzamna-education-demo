@@ -10,8 +10,50 @@ function parseCsv(text) {
   return lines.map((line) => Object.fromEntries(line.split(",").map((value, index) => [fields[index], value])));
 }
 
+function filterByIndicator(rows, indicatorId) {
+  return rows.filter((row) => row.indicator_id === indicatorId);
+}
+
+function filterByEntity(rows, entity) {
+  return entity === "all" ? rows : rows.filter((row) => row.geo_area === entity);
+}
+
+function filterByPeriod(rows, period) {
+  return rows.filter((row) => row.time_period === period);
+}
+
 function selectedRows() {
-  return state.rows.filter((row) => row.indicator_id === state.indicatorId && (state.entity === "all" || row.geo_area === state.entity));
+  return filterByEntity(filterByIndicator(state.rows, state.indicatorId), state.entity);
+}
+
+function aggregateByPeriod(rows) {
+  const grouped = new Map();
+  rows.forEach((row) => {
+    const values = grouped.get(row.time_period) || [];
+    values.push(Number(row.value));
+    grouped.set(row.time_period, values);
+  });
+  return [...grouped.entries()].map(([time_period, values]) => ({
+    time_period,
+    value: values.reduce((sum, value) => sum + value, 0) / values.length,
+    unit: rows[0]?.unit || "",
+    status: values.length === 1 ? rows[0]?.status : "aggregated"
+  })).sort((a, b) => Number(a.time_period) - Number(b.time_period));
+}
+
+function calculatePercentChange(rows, currentPeriod) {
+  const ordered = [...rows].sort((a, b) => Number(a.time_period) - Number(b.time_period));
+  const currentIndex = ordered.findIndex((row) => row.time_period === currentPeriod);
+  const current = ordered[currentIndex];
+  const previous = ordered[currentIndex - 1];
+  if (!current || !previous || Number(previous.value) === 0) return null;
+  return ((Number(current.value) - Number(previous.value)) / Number(previous.value)) * 100;
+}
+
+function buildRanking(rows, period) {
+  return filterByPeriod(filterByIndicator(state.rows, state.indicatorId), period)
+    .sort((a, b) => Number(b.value) - Number(a.value))
+    .map((row, index) => ({ ...row, calculatedRank: index + 1 }));
 }
 
 function populateControls(rows) {
@@ -32,18 +74,19 @@ function renderPeriodOptions() {
 }
 
 function render() {
-  const rows = selectedRows().sort((a, b) => Number(a.time_period) - Number(b.time_period));
+  const filteredRows = selectedRows();
+  const rows = state.entity === "all" ? aggregateByPeriod(filteredRows) : [...filteredRows].sort((a, b) => Number(a.time_period) - Number(b.time_period));
   const current = rows.find((row) => row.time_period === state.period) || rows.at(-1);
-  const previous = rows[rows.indexOf(current) - 1];
+  const percentChange = calculatePercentChange(rows, current?.time_period);
   $("latest-value").textContent = current ? formatValue(current.value, current.unit) : "N/D";
   $("latest-period").textContent = current?.time_period || "-";
-  $("period-change").textContent = current && previous ? `${((current.value - previous.value) / previous.value * 100).toFixed(2)}%` : "N/D";
+  $("period-change").textContent = percentChange === null ? "N/D" : `${percentChange.toFixed(2)}%`;
   $("observation-count").textContent = rows.length;
   $("series-range").textContent = rows.length ? `${rows[0].time_period}–${rows.at(-1).time_period}` : "-";
   $("ranking-period").textContent = state.period;
   const max = Math.max(...rows.map((row) => Number(row.value)), 1);
   $("time-series").innerHTML = rows.map((row) => `<div class="bar-item"><div class="bar" style="height:${Number(row.value) / max * 88}%" title="${formatValue(row.value, row.unit)}"></div><span class="bar-label">${row.time_period}</span></div>`).join("");
-  const ranking = state.rows.filter((row) => row.indicator_id === state.indicatorId && row.time_period === state.period).sort((a, b) => Number(b.value) - Number(a.value));
+  const ranking = buildRanking(state.rows, state.period);
   $("entity-ranking").innerHTML = ranking.map((row) => `<li><span>${row.geo_name}</span><strong>${formatValue(row.value, row.unit)}</strong></li>`).join("");
   $("status-message").textContent = rows.length ? "Datos sintéticos cargados correctamente." : "No hay observaciones para los filtros seleccionados.";
 }
