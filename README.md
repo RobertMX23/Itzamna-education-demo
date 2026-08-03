@@ -38,6 +38,7 @@ y no deben interpretarse como causalidad.
 - [ECharts versus SVG evaluation](docs/echarts-vs-svg-evaluation.md)
 - [ECharts runbook](docs/echarts-runbook.md)
 - [ECharts release decision](docs/echarts-release-decision.md)
+- [Executive review checklist](docs/executive-review-checklist.md)
 
 ## Publication flow
 
