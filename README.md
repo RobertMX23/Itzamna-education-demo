@@ -84,6 +84,8 @@ reconciliation, critical dashboard selectors and relative dataset paths.
 Browser scenarios are documented in
 `tests/e2e/README.md` and can be enabled in a runner with Playwright.
 The public browser gate covers Chromium, Firefox and WebKit.
+The quality gate also checks the minimum contrast of the shared dashboard
+color tokens.
 
 ## Scope
 
