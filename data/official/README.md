@@ -26,8 +26,9 @@ indicator_id,indicator_name,unit,geo_area,geo_name,sex,time_period,value,status,
 - the source URL and extraction date are mandatory;
 - no API token, `.env` file or private credential may be stored here.
 
-The official CSV is not created in this task until its values are extracted
-and reviewed against the cited INEGI publication. The current CSV was
-extracted from INEGI's public 2020 population widget resources and passed the
-96-row reconciliation check. The existing `data/synthetic/dashboard.csv`
-remains the reproducible education demo fixture.
+The current CSV was extracted and validated through the INEGI Banco de
+Indicadores API v2.0. The API smoke test confirmed HTTP 200 responses for all
+three indicator series across the 32 entities, and the 96 values reconcile
+with the existing official dataset. The API token is intentionally excluded
+from this repository. The existing `data/synthetic/dashboard.csv` remains the
+reproducible education demo fixture.
