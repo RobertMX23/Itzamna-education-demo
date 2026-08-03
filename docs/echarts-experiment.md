@@ -33,6 +33,8 @@ The experiment is considered valid when:
    viewport.
 6. Controls and status are discoverable by assistive technology.
 7. Python contracts, smoke tests and ECharts browser tests pass.
+8. The local chart bundle remains below `1.5 MB` transferred and makes no
+   request to the CDN.
 
 ## Promotion gate
 

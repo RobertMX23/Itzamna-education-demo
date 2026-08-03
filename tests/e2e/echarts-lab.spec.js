@@ -38,4 +38,18 @@ test.describe("Itzamna ECharts comparison lab", () => {
     await expect(page.locator(".echarts-toolbar")).toHaveCSS("grid-template-columns", /px/);
     await expect(page.locator("#echarts-comparison")).toBeVisible();
   });
+
+  test("loads the local chart engine without an external CDN", async ({ page }) => {
+    const externalRequests = [];
+    page.on("request", (request) => {
+      if (request.url().includes("jsdelivr.net")) externalRequests.push(request.url());
+    });
+    await page.goto("dashboard/echarts-lab.html");
+    await expect(page.locator("#echarts-status")).toContainText("6 series");
+    expect(externalRequests).toEqual([]);
+    const bundle = await page.evaluate(() => performance.getEntriesByType("resource")
+      .find((entry) => entry.name.includes("/dashboard/vendor/echarts.esm.min.js")));
+    expect(bundle.transferSize).toBeGreaterThan(0);
+    expect(bundle.transferSize).toBeLessThan(1_500_000);
+  });
 });
