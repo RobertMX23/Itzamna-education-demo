@@ -1,0 +1,11 @@
+version: "1.0"
+title: "ECharts two-entity population comparison"
+comparison:
+  entities: 2
+  series_per_entity: 3
+  series: [total, male, female]
+visual_rules:
+  - "The primary entity uses solid lines."
+  - "The comparison entity uses dashed lines."
+  - "Both entities share the same persons scale."
+  - "The comparison is descriptive and does not imply causality."
