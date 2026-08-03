@@ -68,4 +68,13 @@ test.describe("Itzamna ECharts comparison lab", () => {
       /6 series count/
     );
   });
+
+  test("keeps chart labels semantic and free of invalid values", async ({ page }) => {
+    await page.goto("dashboard/echarts-lab.html");
+    const chart = page.locator("#echarts-comparison");
+    await expect(chart).toBeVisible();
+    await expect(chart).not.toContainText("NaN");
+    await expect(chart).not.toContainText("15 -");
+    await expect(chart).not.toContainText("05 -");
+  });
 });
