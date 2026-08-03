@@ -25,8 +25,9 @@ class EChartsLabContractTests(unittest.TestCase):
         self.assertIn("population_historical.csv", self.script)
         self.assertIn("buildComparisonOption", self.script)
 
-    def test_lab_uses_pinned_echarts_version(self):
-        self.assertIn("echarts@6.1.0", self.script)
+    def test_lab_uses_local_pinned_echarts_bundle(self):
+        self.assertIn('from "../../vendor/echarts.esm.min.js"', self.script)
+        self.assertTrue((ROOT / "dashboard" / "vendor" / "echarts.esm.min.js").exists())
         self.assertIn('renderer: "svg"', self.script)
 
 

@@ -1,4 +1,4 @@
-import * as echarts from "https://cdn.jsdelivr.net/npm/echarts@6.1.0/dist/echarts.esm.min.js";
+import * as echarts from "../../vendor/echarts.esm.min.js";
 import { parsePopulationCsv } from "./population-lab-data.js";
 import { toHistoricalDataset } from "./population-adapter.js";
 import { buildComparisonOption } from "./population-comparison-option.js";

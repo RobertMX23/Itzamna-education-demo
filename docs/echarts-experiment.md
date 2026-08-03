@@ -14,8 +14,8 @@ HTML, JavaScript, chart adapter or visual contract.
 - Entry point: `dashboard/echarts-lab.html`.
 - Data: `data/official/population_historical.csv`.
 - Renderer: ECharts SVG renderer.
-- Library: Apache ECharts `6.1.0`, pinned in `package.json` and imported by
-  the isolated lab.
+- Library: Apache ECharts `6.1.0`, pinned in `package.json` and vendored as
+  `dashboard/vendor/echarts.esm.min.js` for static hosting.
 - Comparison: exactly two distinct entities and three population series per
   entity.
 - Hosting: compatible with static GitHub Pages because the lab uses browser
@@ -39,8 +39,8 @@ The experiment is considered valid when:
 Do not merge the experiment into the stable dashboard until these decisions
 are approved:
 
-- Replace the CDN import with a reproducible local bundle for production
-  deployment.
+- Keep the local bundle synchronized with the pinned dependency and review
+  its size during releases.
 - Compare bundle size and first-render time against the current SVG chart.
 - Complete keyboard, screen-reader and color-contrast review.
 - Confirm that the chart remains explanatory and does not imply causality.
@@ -54,4 +54,3 @@ npm run test:e2e:echarts
 python -m pytest -q
 python tests/smoke_dashboard.py
 ```
-
