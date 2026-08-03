@@ -1,0 +1,14 @@
+version: "1.0"
+title: "ECharts population adapter contract"
+input:
+  required_fields: [indicator_id, geo_area, geo_name, sex, time_period, value]
+  allowed_sexes: [total, male, female]
+output:
+  dimensions: [period, entity, sex, value, geo_name]
+  source: "Rows without mutation, sorted by period, entity and sex."
+rules:
+  - "Periodos are sorted numerically, not lexicographically."
+  - "Values must be finite numbers."
+  - "Comparison requires two distinct entities."
+  - "The adapter does not fetch data or access secrets."
+  - "The adapter does not change the SVG renderer."
