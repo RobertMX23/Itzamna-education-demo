@@ -106,7 +106,7 @@ function calculatePopulationMetrics(period) {
 }
 
 function buildRanking(rows, period) {
-  const direction = state.sort === "asc" ? 1 : -1;
+  const direction = state.sort === "asc" ? -1 : 1;
   return filterByPeriod(filterByIndicator(state.rows, state.indicatorId), period)
     .sort((a, b) => direction * (Number(b.value) - Number(a.value)))
     .map((row, index) => ({ ...row, calculatedRank: index + 1 }));
