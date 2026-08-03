@@ -59,6 +59,9 @@ function buildComparisonOption(dataset, firstEntity, secondEntity) {
     title: { text: "Comparación entre entidades", subtext: `${entityLabel(firstEntity)} vs ${entityLabel(secondEntity)}`, left: 0 },
     tooltip: {
       trigger: "axis",
+      confine: true,
+      enterable: false,
+      axisPointer: { type: "line" },
       valueFormatter: (value) => Number(value).toLocaleString("es-MX"),
       formatter: (params) => {
         const period = params[0]?.axisValue || "";
@@ -66,8 +69,8 @@ function buildComparisonOption(dataset, firstEntity, secondEntity) {
         return [`<strong>Periodo: ${period}</strong>`, ...lines].join("<br>");
       }
     },
-    legend: { type: "scroll", top: 32, left: 0, right: 0, orient: "horizontal" },
-    grid: { left: 58, right: 24, top: 96, bottom: 72, containLabel: true },
+    legend: { type: "scroll", top: 34, left: 0, right: 0, orient: "horizontal", itemGap: 14 },
+    grid: { left: 58, right: 24, top: 104, bottom: 72, containLabel: true },
     xAxis: { type: "category", name: "Periodo", boundaryGap: false },
     yAxis: { type: "value", name: "Personas", axisLabel: { formatter: (value) => Number(value).toLocaleString("es-MX") } },
     dataZoom: [{ type: "inside" }, { type: "slider", height: 18, bottom: 18 }],
