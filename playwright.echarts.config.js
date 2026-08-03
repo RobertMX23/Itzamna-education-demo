@@ -11,7 +11,8 @@ module.exports = defineConfig({
   webServer: {
     command: "python -m http.server 8081",
     url: "http://127.0.0.1:8081/",
-    reuseExistingServer: true,
+    // CI must own the server lifecycle; do not depend on a stale local process.
+    reuseExistingServer: false,
     timeout: 30000
   }
 });
