@@ -6,6 +6,10 @@
 .echarts-lab h1,
 .echarts-lab .lede,
 .echarts-lab .notice { overflow-wrap: anywhere; }
+.echarts-lab h1 { font-size: clamp(3rem, 6.4vw, 6.4rem); line-height: .9; }
+.echarts-lab .page-header { align-items: end; }
+.echarts-lab .page-header .lede { max-width: 28rem; }
+.echarts-lab .panel-heading span { text-align: right; }
 .echarts-container { min-width: 0; max-width: 100%; min-height: 560px; margin-top: 18px; overflow: hidden; }
 .echarts-container svg { display: block; max-width: 100%; overflow: hidden; }
-@media (max-width: 720px) { .echarts-toolbar { grid-template-columns: 1fr; } .echarts-container { min-height: 460px; } }
+@media (max-width: 720px) { .echarts-toolbar { grid-template-columns: 1fr; } .echarts-container { min-height: 460px; } .echarts-lab h1 { font-size: clamp(2.7rem, 14vw, 4.8rem); } .echarts-lab .panel-heading { align-items: start; flex-direction: column; } .echarts-lab .panel-heading span { text-align: left; } }

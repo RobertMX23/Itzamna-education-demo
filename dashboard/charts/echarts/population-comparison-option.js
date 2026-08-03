@@ -12,6 +12,9 @@ function buildComparisonOption(dataset, firstEntity, secondEntity) {
     throw new Error("Comparison requires two different entities");
   }
 
+  const entityNames = new Map(dataset.source.map((row) => [row[1], row[4]]));
+  const entityLabel = (entity) => entityNames.get(entity) || entity;
+
   const datasets = [{ id: "comparison-source", dimensions: dataset.dimensions, source: dataset.source }];
   const series = [];
   entities.forEach((entity, entityIndex) => {
@@ -29,7 +32,7 @@ function buildComparisonOption(dataset, firstEntity, secondEntity) {
         transform: { type: "filter", config: { dimension: "sex", value: sex.key } }
       });
       series.push({
-        name: `${entity} - ${sex.label}`,
+        name: `${entityLabel(entity)} - ${sex.label}`,
         type: "line",
         smooth: 0.18,
         showSymbol: true,
@@ -41,17 +44,22 @@ function buildComparisonOption(dataset, firstEntity, secondEntity) {
           type: entityIndex === 0 ? "solid" : "dashed"
         },
         datasetId,
-        encode: { x: "period", y: "value", tooltip: ["period", "entity", "sex", "value"] }
+        encode: { x: "period", y: "value" }
       });
     });
   });
 
   return {
     aria: { show: true, decal: { show: true } },
-    title: { text: "Comparacion entre entidades", subtext: `${firstEntity} vs ${secondEntity}`, left: 0 },
+    title: { text: "Comparación entre entidades", subtext: `${entityLabel(firstEntity)} vs ${entityLabel(secondEntity)}`, left: 0 },
     tooltip: {
       trigger: "axis",
-      valueFormatter: (value) => Number(value).toLocaleString("es-MX")
+      valueFormatter: (value) => Number(value).toLocaleString("es-MX"),
+      formatter: (params) => {
+        const period = params[0]?.axisValue || "";
+        const lines = params.map((item) => `${item.marker}${item.seriesName}: ${Number(item.value[3]).toLocaleString("es-MX")} personas`);
+        return [`<strong>Periodo: ${period}</strong>`, ...lines].join("<br>");
+      }
     },
     legend: { type: "scroll", top: 32, left: 0, right: 0, orient: "horizontal" },
     grid: { left: 58, right: 24, top: 96, bottom: 72, containLabel: true },
