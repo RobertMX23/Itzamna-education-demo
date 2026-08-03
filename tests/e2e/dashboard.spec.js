@@ -30,7 +30,7 @@ test.describe("Itzamna population dashboard", () => {
     await page.locator("#chart-mode").selectOption("composition");
     await expect(page.locator("#chart-title")).toHaveText("Composicion por sexo");
     await expect(page.locator("#composition-chart")).toBeVisible();
-    await expect(page.locator("#time-series")).toBeHidden();
+    await expect(page.locator("#time-series")).toHaveAttribute("hidden", "");
   });
 
   test("shows derived period variation in the observation table", async ({ page }) => {
