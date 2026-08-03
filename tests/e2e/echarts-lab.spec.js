@@ -52,4 +52,20 @@ test.describe("Itzamna ECharts comparison lab", () => {
     expect(bundle.transferSize).toBeGreaterThan(0);
     expect(bundle.transferSize).toBeLessThan(1_500_000);
   });
+
+  test("exposes keyboard and semantic chart controls", async ({ page }) => {
+    await page.goto("dashboard/echarts-lab.html");
+    const first = page.locator("#echarts-first-entity");
+    const second = page.locator("#echarts-second-entity");
+    await first.focus();
+    await expect(first).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(second).toBeFocused();
+    await expect(first).toHaveAttribute("aria-label", "Seleccionar entidad principal");
+    await expect(second).toHaveAttribute("aria-label", "Seleccionar entidad comparativa");
+    await expect(page.locator("#echarts-comparison")).toHaveAttribute(
+      "aria-label",
+      /Comparacion entre entidades/
+    );
+  });
 });
