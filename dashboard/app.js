@@ -80,6 +80,20 @@ function calculatePercentChange(rows, currentPeriod) {
   return ((Number(current.value) - Number(previous.value)) / Number(previous.value)) * 100;
 }
 
+function withDerivedPercentChanges(rows) {
+  const groups = new Map();
+  rows.forEach((row) => {
+    const key = `${row.indicator_id}|${row.geo_area}`;
+    const group = groups.get(key) || [];
+    group.push(row);
+    groups.set(key, group);
+  });
+  return rows.map((row) => ({
+    ...row,
+    percent_change: calculatePercentChange(groups.get(`${row.indicator_id}|${row.geo_area}`), row.time_period)
+  }));
+}
+
 function aggregateSexValues(rows) {
   return rows.reduce((values, row) => {
     values[row.sex] = (values[row.sex] || 0) + Number(row.value);
@@ -223,8 +237,10 @@ function render() {
   const ranking = buildRanking(state.rows, state.period);
   $("entity-ranking").innerHTML = ranking.map((row) => `<li><span>${row.geo_name}</span><strong>${formatValue(row.value, row.unit)}</strong></li>`).join("");
   renderMetadata(filteredRows);
-  renderObservationTable(filteredRows);
-  renderHeatmap(filterByIndicator(state.rows, state.indicatorId));
+  const derivedRows = withDerivedPercentChanges(filterByIndicator(state.rows, state.indicatorId));
+  const selectedDerivedRows = filterByEntity(derivedRows, state.entity);
+  renderObservationTable(selectedDerivedRows);
+  renderHeatmap(derivedRows);
   $("status-message").textContent = rows.length ? "Datos oficiales de INEGI cargados correctamente." : "No hay observaciones para los filtros seleccionados.";
 }
 

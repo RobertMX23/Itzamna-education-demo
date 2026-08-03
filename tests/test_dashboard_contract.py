@@ -69,6 +69,7 @@ class DashboardContractTests(unittest.TestCase):
         self.assertIn('value="composition"', self.html)
         self.assertIn('function renderHistoricalChart', self.app)
         self.assertIn('function renderCompositionChart', self.app)
+        self.assertIn('function withDerivedPercentChanges', self.app)
 
     def test_app_has_separate_filter_and_metric_functions(self):
         for function_name in (
