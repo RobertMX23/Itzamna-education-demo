@@ -88,6 +88,16 @@ class DashboardContractTests(unittest.TestCase):
         self.assertIn('character === \'"\' && quoted', self.app)
         self.assertIn("Object.fromEntries(fields.map", self.app)
 
+    def test_official_entity_labels_preserve_utf8_accents(self):
+        names = {row["geo_name"] for row in self.rows}
+        self.assertIn("México", names)
+        self.assertIn("Ciudad de México", names)
+        self.assertIn("Nuevo León", names)
+        self.assertNotRegex(" ".join(names), r"Ã|Â")
+
+    def test_dashboard_exposes_spanish_metric_label(self):
+        self.assertIn('aria-label="Métricas principales"', self.html)
+
 
 if __name__ == "__main__":
     unittest.main()
