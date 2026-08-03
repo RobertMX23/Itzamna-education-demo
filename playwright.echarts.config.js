@@ -2,7 +2,7 @@ const { defineConfig, devices } = require("@playwright/test");
 
 module.exports = defineConfig({
   testDir: "./tests/e2e",
-  testMatch: "echarts-lab.spec.js",
+  testMatch: /(?:echarts-lab|echarts-visual-review)\.spec\.js/,
   timeout: 30000,
   use: {
     baseURL: "http://127.0.0.1:8081/",

@@ -1,5 +1,11 @@
 .echarts-toolbar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space); margin-top: var(--space); }
 .echarts-toolbar select:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 .echarts-panel { margin-top: var(--space); }
-.echarts-container { min-height: 560px; margin-top: 18px; }
+.echarts-lab .page-header,
+.echarts-lab .page-header > * { min-width: 0; max-width: 100%; }
+.echarts-lab h1,
+.echarts-lab .lede,
+.echarts-lab .notice { overflow-wrap: anywhere; }
+.echarts-container { min-width: 0; max-width: 100%; min-height: 560px; margin-top: 18px; overflow: hidden; }
+.echarts-container svg { display: block; max-width: 100%; overflow: hidden; }
 @media (max-width: 720px) { .echarts-toolbar { grid-template-columns: 1fr; } .echarts-container { min-height: 460px; } }

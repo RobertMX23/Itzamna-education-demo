@@ -53,7 +53,7 @@ function buildComparisonOption(dataset, firstEntity, secondEntity) {
       trigger: "axis",
       valueFormatter: (value) => Number(value).toLocaleString("es-MX")
     },
-    legend: { type: "scroll", top: 32 },
+    legend: { type: "scroll", top: 32, left: 0, right: 0, orient: "horizontal" },
     grid: { left: 58, right: 24, top: 96, bottom: 72, containLabel: true },
     xAxis: { type: "category", name: "Periodo", boundaryGap: false },
     yAxis: { type: "value", name: "Personas", axisLabel: { formatter: (value) => Number(value).toLocaleString("es-MX") } },

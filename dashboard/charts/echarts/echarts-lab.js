@@ -7,7 +7,8 @@ const DATA_URL = "../../../data/official/population_historical.csv";
 const firstSelect = document.getElementById("echarts-first-entity");
 const secondSelect = document.getElementById("echarts-second-entity");
 const status = document.getElementById("echarts-status");
-const chart = echarts.init(document.getElementById("echarts-comparison"), null, { renderer: "svg" });
+const chartContainer = document.getElementById("echarts-comparison");
+const chart = echarts.init(chartContainer, null, { renderer: "svg" });
 
 let rows = [];
 
@@ -29,6 +30,8 @@ function renderComparison() {
   }
   const dataset = toHistoricalDataset(rows, { entities: [first, second] });
   chart.setOption(buildComparisonOption(dataset, first, second), true);
+  chart.resize({ width: chartContainer.clientWidth, height: chartContainer.clientHeight });
+  requestAnimationFrame(() => chart.resize());
   status.textContent = `${dataset.periods.length} periodos · 2 entidades · 6 series`;
 }
 
@@ -41,6 +44,7 @@ async function init() {
     firstSelect.addEventListener("change", renderComparison);
     secondSelect.addEventListener("change", renderComparison);
     window.addEventListener("resize", () => chart.resize());
+    new ResizeObserver(() => chart.resize()).observe(chartContainer);
     renderComparison();
   } catch (error) {
     status.textContent = `No se pudo cargar el laboratorio: ${error.message}`;
