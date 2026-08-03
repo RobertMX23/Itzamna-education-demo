@@ -1,0 +1,4 @@
+.echarts-toolbar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space); margin-top: var(--space); }
+.echarts-panel { margin-top: var(--space); }
+.echarts-container { min-height: 560px; margin-top: 18px; }
+@media (max-width: 720px) { .echarts-toolbar { grid-template-columns: 1fr; } .echarts-container { min-height: 460px; } }
