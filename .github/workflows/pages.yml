@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      publish_pages:
+        description: "Publicar esta rama en GitHub Pages"
+        required: true
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -39,7 +45,7 @@ jobs:
 
   deploy:
     needs: quality
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || inputs.publish_pages == true
     runs-on: ubuntu-latest
     environment:
       name: github-pages
