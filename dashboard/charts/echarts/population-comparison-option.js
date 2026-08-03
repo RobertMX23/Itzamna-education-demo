@@ -5,6 +5,11 @@ const SEXES = [
 ];
 
 const ENTITY_COLORS = ["#17324a", "#5aa9e6"];
+const COMPARISON_SEX_COLORS = {
+  total: "#5aa9e6",
+  male: "#7bc8d9",
+  female: "#b59ae8"
+};
 
 function buildComparisonOption(dataset, firstEntity, secondEntity) {
   const entities = [firstEntity, secondEntity];
@@ -37,9 +42,9 @@ function buildComparisonOption(dataset, firstEntity, secondEntity) {
         smooth: 0.18,
         showSymbol: true,
         symbolSize: 6,
-        itemStyle: { color: entityIndex === 0 ? sex.color : ENTITY_COLORS[1] },
+        itemStyle: { color: entityIndex === 0 ? sex.color : COMPARISON_SEX_COLORS[sex.key] },
         lineStyle: {
-          color: entityIndex === 0 ? sex.color : ENTITY_COLORS[1],
+          color: entityIndex === 0 ? sex.color : COMPARISON_SEX_COLORS[sex.key],
           width: sex.key === "total" ? 4 : 2,
           type: entityIndex === 0 ? "solid" : "dashed"
         },
