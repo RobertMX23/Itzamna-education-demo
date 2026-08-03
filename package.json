@@ -1,0 +1,12 @@
+{
+  "name": "itzamna-population-demo-e2e",
+  "private": true,
+  "version": "0.2.0",
+  "description": "Browser acceptance tests for the Itzamna population dashboard.",
+  "scripts": {
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
+  }
+}

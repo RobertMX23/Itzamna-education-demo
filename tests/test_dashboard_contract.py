@@ -73,6 +73,10 @@ class DashboardContractTests(unittest.TestCase):
         ):
             self.assertIn(f"function {function_name}", self.app)
 
+    def test_app_parser_handles_quoted_csv_contract(self):
+        self.assertIn('character === \'"\' && quoted', self.app)
+        self.assertIn("Object.fromEntries(fields.map", self.app)
+
 
 if __name__ == "__main__":
     unittest.main()

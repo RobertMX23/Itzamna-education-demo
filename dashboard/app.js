@@ -5,9 +5,37 @@ const $ = (id) => document.getElementById(id);
 const formatValue = (value, unit) => `${Number(value).toLocaleString("es-MX", { maximumFractionDigits: 1 })}${unit === "percent" ? "%" : ""}`;
 
 function parseCsv(text) {
-  const [header, ...lines] = text.trim().split(/\r?\n/);
-  const fields = header.split(",");
-  return lines.map((line) => Object.fromEntries(line.split(",").map((value, index) => [fields[index], value])));
+  const records = [];
+  let record = [];
+  let value = "";
+  let quoted = false;
+
+  for (let index = 0; index < text.length; index += 1) {
+    const character = text[index];
+    const nextCharacter = text[index + 1];
+    if (character === '"' && quoted && nextCharacter === '"') {
+      value += '"';
+      index += 1;
+    } else if (character === '"') {
+      quoted = !quoted;
+    } else if (character === "," && !quoted) {
+      record.push(value);
+      value = "";
+    } else if ((character === "\n" || character === "\r") && !quoted) {
+      if (character === "\r" && nextCharacter === "\n") index += 1;
+      record.push(value);
+      if (record.some((field) => field !== "")) records.push(record);
+      record = [];
+      value = "";
+    } else {
+      value += character;
+    }
+  }
+
+  record.push(value);
+  if (record.some((field) => field !== "")) records.push(record);
+  const [fields, ...rows] = records;
+  return rows.map((row) => Object.fromEntries(fields.map((field, index) => [field, row[index] || ""])));
 }
 
 function filterByIndicator(rows, indicatorId) {

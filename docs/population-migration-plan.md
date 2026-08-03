@@ -87,3 +87,30 @@ not reconcile exactly.
 The synthetic education fixture and its tests must remain recoverable until
 the official population release has passed all gates. A failed population
 release must not delete or mutate the existing synthetic fixture.
+
+## Iteration 1 closure
+
+The population MVP is frozen at release `0.2.0` after completing POP-01
+through POP-10. The public artifact is deployed through GitHub Pages only
+after Python contracts, the official-data smoke test and JavaScript syntax
+validation pass.
+
+| Gate | Result | Evidence |
+|---|---|---|
+| Scope and data contract | Passed | `dashboard/dashboard_spec.yaml` |
+| Official extract | Passed | `data/official/population_2020.csv` |
+| Demographic reconciliation | Passed | `tests/test_population_official_contract.py` |
+| Dashboard contract | Passed | `tests/test_dashboard_contract.py` |
+| Local smoke | Passed | `tests/smoke_dashboard.py` |
+| Pages quality gate | Configured | `.github/workflows/pages.yml` |
+| Public deployment | Passed | `portfolio/release-manifest.json` |
+
+## Iteration 2 backlog
+
+The following items are intentionally outside the frozen MVP:
+
+1. Add real Chromium E2E execution in CI.
+2. Add additional comparable census periods after methodology review.
+3. Add a composition visualization for women and men.
+4. Add a documented data refresh process with source-change detection.
+5. Evaluate geographic maps only after official geometry and code validation.

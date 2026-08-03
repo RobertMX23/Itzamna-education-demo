@@ -11,6 +11,14 @@ runner is available.
 5. Verify the observation table, metadata and status message are visible.
 6. Run the same checks at desktop and mobile viewport widths.
 
-The public demo does not install browser dependencies by default. This keeps
-GitHub Pages lightweight and avoids coupling the static artifact to a local
-browser runtime.
+The public demo does not install browser dependencies in the Pages artifact.
+The independent `.github/workflows/e2e.yml` workflow installs Chromium and
+runs these scenarios against the public deployment.
+
+Run locally after installing Node dependencies:
+
+```powershell
+npm install
+npx playwright install chromium
+npm run test:e2e
+```
