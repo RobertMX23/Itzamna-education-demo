@@ -35,6 +35,7 @@ y no deben interpretarse como causalidad.
 - [Release manifest](portfolio/release-manifest.json)
 - [Visual review](docs/visual-review.md)
 - [ECharts experiment](docs/echarts-experiment.md)
+- [ECharts versus SVG evaluation](docs/echarts-vs-svg-evaluation.md)
 
 ## Publication flow
 
