@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Dashboard educativo descriptivo con datos sintéticos.">
-    <title>Education indicators dashboard</title>
+    <meta name="description" content="Dashboard descriptivo de poblacion oficial de INEGI por entidad, sexo y periodo.">
+    <title>Population dashboard</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <main class="shell">
       <header class="page-header">
         <p class="eyebrow">ITZAMNA / PROJECT 02</p>
-        <h1>Education dashboard</h1>
-        <p class="lede">Compara indicadores educativos por entidad y periodo.</p>
-        <p class="notice">Datos sintéticos para demostración. No representan cifras oficiales.</p>
+        <h1>Population dashboard</h1>
+        <p class="lede">Compara poblacion total, hombres y mujeres por entidad.</p>
+        <p class="notice">Fuente oficial: INEGI, Censo de Población y Vivienda 2020.</p>
       </header>
 
       <section class="toolbar" aria-label="Filtros del dashboard">
@@ -26,12 +26,18 @@
         <label>Periodo
           <select id="period-filter" aria-label="Seleccionar periodo"></select>
         </label>
+        <label>Orden
+          <select id="sort-filter" aria-label="Ordenar ranking">
+            <option value="desc">Mayor a menor</option>
+            <option value="asc">Menor a mayor</option>
+          </select>
+        </label>
       </section>
 
       <section class="metrics" aria-label="Métricas principales">
-        <article><span>Último valor</span><strong id="latest-value">N/D</strong><small id="latest-period">-</small></article>
-        <article><span>Cambio porcentual</span><strong id="period-change">N/D</strong><small>vs. periodo anterior</small></article>
-        <article><span>Observaciones</span><strong id="observation-count">0</strong><small>en la selección</small></article>
+        <article><span>Poblacion seleccionada</span><strong id="latest-value">N/D</strong><small id="latest-period">-</small></article>
+        <article><span>Participacion femenina</span><strong id="period-change">N/D</strong><small>mujeres sobre el total</small></article>
+        <article><span>Brecha mujeres-hombres</span><strong id="observation-count">N/D</strong><small>diferencia absoluta</small></article>
       </section>
 
       <section class="metadata" aria-label="Contexto del indicador">
@@ -40,7 +46,7 @@
         <span>Cobertura: <strong id="data-coverage">-</strong></span>
       </section>
 
-      <section class="visual-grid" aria-label="Visualizaciones educativas">
+      <section class="visual-grid" aria-label="Visualizaciones demograficas">
         <article class="panel">
           <div class="panel-heading"><h2>Serie temporal</h2><span id="series-range">-</span></div>
           <div id="time-series" class="chart" role="img" aria-label="Serie temporal del indicador seleccionado"></div>

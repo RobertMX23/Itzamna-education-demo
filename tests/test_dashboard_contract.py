@@ -1,4 +1,4 @@
-"""Contract tests for the public, synthetic dashboard artifact."""
+"""Contract tests for the public dashboard artifact."""
 
 import csv
 import re
@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).parents[1]
-DATASET = ROOT / "data" / "synthetic" / "dashboard.csv"
+DATASET = ROOT / "data" / "official" / "population_2020.csv"
 HTML = ROOT / "dashboard" / "index.html"
 APP = ROOT / "dashboard" / "app.js"
 
@@ -15,7 +15,7 @@ APP = ROOT / "dashboard" / "app.js"
 class DashboardContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        with DATASET.open(newline="", encoding="utf-8") as handle:
+        with DATASET.open(newline="", encoding="utf-8-sig") as handle:
             cls.rows = list(csv.DictReader(handle))
         cls.html = HTML.read_text(encoding="utf-8")
         cls.app = APP.read_text(encoding="utf-8")
@@ -30,30 +30,35 @@ class DashboardContractTests(unittest.TestCase):
             "time_period",
             "value",
             "status",
-            "percent_change",
-            "rank",
+            "sex",
+            "source_url",
+            "extraction_date",
         }
         self.assertTrue(required.issubset(self.rows[0]))
         self.assertGreater(len(self.rows), 0)
 
     def test_dataset_contains_multiple_entities_and_periods(self):
         self.assertGreater(len({row["geo_area"] for row in self.rows}), 1)
-        self.assertGreater(len({row["time_period"] for row in self.rows}), 1)
+        self.assertEqual({row["time_period"] for row in self.rows}, {"2020"})
 
     def test_html_exposes_critical_controls_and_outputs(self):
         for element_id in (
             "indicator-filter",
             "entity-filter",
             "period-filter",
+            "sort-filter",
             "latest-value",
             "period-change",
             "observation-table",
             "growth-heatmap",
         ):
             self.assertIn(f'id="{element_id}"', self.html)
+        for label in ("Poblacion seleccionada", "Participacion femenina", "Brecha mujeres-hombres"):
+            self.assertIn(label, self.html)
+        self.assertIn("Fuente oficial: INEGI", self.html)
 
     def test_app_uses_relative_dataset_reference(self):
-        self.assertIn('"../data/synthetic/dashboard.csv"', self.app)
+        self.assertIn('"../data/official/population_2020.csv"', self.app)
         self.assertNotRegex(self.app, r"(?:C:|/home/|https?://).*(?:csv|json)")
 
     def test_app_has_separate_filter_and_metric_functions(self):
@@ -62,6 +67,8 @@ class DashboardContractTests(unittest.TestCase):
             "filterByEntity",
             "filterByPeriod",
             "calculatePercentChange",
+            "aggregateSexValues",
+            "calculatePopulationMetrics",
             "buildRanking",
         ):
             self.assertIn(f"function {function_name}", self.app)

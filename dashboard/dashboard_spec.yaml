@@ -1,6 +1,6 @@
-version: "1.0"
-title: "Education indicators dashboard"
-purpose: "Comparar indicadores educativos por entidad y periodo sin inferir causalidad."
+version: "2.0"
+title: "Population indicators dashboard"
+purpose: "Comparar poblacion total, hombres y mujeres por entidad y periodo sin inferir causalidad."
 audience:
   - data analyst
   - planeacion
@@ -9,7 +9,7 @@ filters:
   - id: indicator
     label: Indicador
     required: true
-    allowed: [EDU-SCHOOLING-MEAN, EDU-ATTENDANCE-RATE, EDU-LITERACY-RATE, EDU-COVERAGE-RATE]
+    allowed: [POP-TOTAL, POP-MALE, POP-FEMALE]
   - id: entity
     label: Entidad
     required: false
@@ -18,26 +18,36 @@ filters:
     label: Periodo
     required: true
     behavior: "Solo periodos presentes en el indicador seleccionado."
+  - id: sort
+    label: Orden
+    required: true
+    allowed: [desc, asc]
+    behavior: "Ordenar el ranking territorial de mayor a menor o de menor a mayor."
 analysis_modes:
   individual:
     label: "Entidad seleccionada"
     dimensions: [indicator_id, geo_area, time_period]
-    metrics: [value, absolute_change, percent_change]
+    metrics: [value, unit, sex, source, status]
   comparative:
     label: "Comparacion territorial"
     dimensions: [indicator_id, time_period, geo_area]
-    metrics: [value, rank, territorial_gap]
+    metrics: [value, rank, territorial_gap, sort_direction]
 metrics:
-  - id: latest_value
-    label: Ultimo valor
-    source: value
-  - id: period_change
-    label: Cambio porcentual
-    source: percent_change
-    rule: "Mostrar N/D si no existe periodo anterior o si el anterior es cero."
-  - id: observations
-    label: Observaciones
-    source: "count(value)"
+  - id: selected_population
+    label: Poblacion seleccionada
+    source: "sum(value) por indicador, entidad y periodo"
+    rule: "Para todas las entidades, sumar; no promediar poblacion."
+  - id: female_share
+    label: Participacion femenina
+    source: "female / total * 100"
+    rule: "Mostrar N/D si el total es cero o no existe la categoria femenina."
+  - id: gender_gap
+    label: Brecha mujeres-hombres
+    source: "female - male"
+    rule: "La brecha es absoluta y conserva el signo; no representa desigualdad causal."
+  - id: data_coverage
+    label: Cobertura
+    source: "count(distinct geo_area)"
 visualizations:
   - id: time_series
     type: bar
@@ -50,18 +60,18 @@ visualizations:
     title: Ranking territorial
     x: value
     y: geo_name
-    rule: "Orden descendente; indicar periodo seleccionado."
+    rule: "Respetar sort; indicar periodo seleccionado y unidad."
   - id: growth_heatmap
     type: heatmap
     title: Consistencia de crecimiento
     rows: geo_name
     columns: time_period
-    value: percent_change
-    rule: "Usar color como apoyo; conservar el valor porcentual visible."
+    value: value
+    rule: "Solo habilitar cuando existan varios periodos; usar color como apoyo."
   - id: observation_table
     type: table
     title: Detalle de observaciones
-    columns: [geo_name, time_period, value, percent_change, status]
+    columns: [geo_name, sex, time_period, value, unit, status, source]
     rule: "La tabla es la alternativa accesible a las visualizaciones."
   - id: relationship_note
     type: annotation
@@ -70,11 +80,12 @@ visualizations:
 states:
   empty: "No hay observaciones para los filtros seleccionados."
   incomplete: "La cobertura disponible no permite una comparacion completa."
-  synthetic: "Datos sinteticos para demostracion; no representan cifras oficiales."
+  official: "Datos oficiales de INEGI, Censo de Poblacion y Vivienda 2020."
 accessibility:
   - "Cada control tiene label visible y aria-label cuando sea necesario."
   - "El color no es el unico canal para comunicar estados."
   - "Los graficos incluyen titulo, periodo y unidad."
+  - "La fuente y la fecha de extraccion se conservan en el dataset."
   - "La tabla de observaciones permite leer los valores sin depender del color."
 responsive:
   desktop: "Tres metricas en fila; visualizaciones en dos columnas."

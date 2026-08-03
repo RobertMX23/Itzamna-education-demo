@@ -11,7 +11,7 @@ REQUIRED_FILES = (
     ROOT / "dashboard" / "index.html",
     ROOT / "dashboard" / "styles.css",
     ROOT / "dashboard" / "app.js",
-    ROOT / "data" / "synthetic" / "dashboard.csv",
+    ROOT / "data" / "official" / "population_2020.csv",
 )
 
 
@@ -21,13 +21,27 @@ def main() -> int:
         print(f"FAIL missing files: {', '.join(missing)}")
         return 1
 
-    with (ROOT / "data" / "synthetic" / "dashboard.csv").open(newline="", encoding="utf-8") as handle:
+    with (ROOT / "data" / "official" / "population_2020.csv").open(newline="", encoding="utf-8-sig") as handle:
         rows = list(csv.DictReader(handle))
     if not rows:
         print("FAIL dataset is empty")
         return 1
 
-    print(f"PASS dashboard package: {len(rows)} synthetic observations")
+    entities = {row["geo_area"] for row in rows}
+    periods = {row["time_period"] for row in rows}
+    sexes = {row["sex"] for row in rows}
+    required_columns = {"source_url", "extraction_date", "methodology_note"}
+    if len(entities) != 32 or periods != {"2020"} or sexes != {"total", "male", "female"}:
+        print("FAIL official dataset does not match the population smoke contract")
+        return 1
+    if not required_columns.issubset(rows[0]):
+        print("FAIL official dataset is missing lineage columns")
+        return 1
+    if not all(row["status"] == "official" for row in rows):
+        print("FAIL dataset contains non-official status values")
+        return 1
+
+    print(f"PASS dashboard package: {len(rows)} official observations, {len(entities)} entities")
     return 0
 
 

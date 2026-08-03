@@ -1,39 +1,41 @@
-# EDU-26: checklist de aceptación
+# PROJECT-02: checklist de aceptacion
 
 ## Resultado de cierre
 
 Estado esperado: `accepted-for-next-iteration`.
 
-| Área | Criterio | Evidencia | Estado |
+| Area | Criterio | Evidencia | Estado |
 | --- | --- | --- | --- |
-| Alcance | Preguntas y exclusiones documentadas | `scope.yaml` | [x] |
-| Contrato | Metadata, geografía, unidad y observaciones definidas | `data/synthetic/contract.yaml` | [x] |
-| Datos | Fixture sintético con 60 observaciones | `data/synthetic/catalog.json` | [x] |
-| Normalización | Tabla plana reproducible | `scripts/normalize_education_dataset.py` | [x] |
-| Métricas | Cambio, ranking y brecha | `scripts/compute_education_metrics.py` | [x] |
-| Relaciones | Correlación descriptiva con límites | `docs/relationships.md` | [x] |
-| Segmentación | Bandas relativas no oficiales | `docs/segmentation.md` | [x] |
-| Consolidación | CSV único para dashboard | `data/synthetic/dashboard.csv` | [x] |
-| Dashboard | Filtros, métricas, serie y ranking | `dashboard/index.html` | [x] |
-| Calidad | Validador del artefacto | `scripts/validate_education_dashboard_artifact.py` | [x] |
-| QA | Unit, smoke y E2E preparado | `tests/` | [x] |
-| CI | Job independiente del Proyecto 02 | `.github/workflows/ci.yml` | [x] |
-| Portafolio | Narrativa sanitizada | `portfolio/case-study.md` | [x] |
-| Semantica | La seleccion individual no mezcla entidades | `dashboard/app.js` | [x] |
-| Comparacion | El ranking usa indicador y periodo seleccionados | `dashboard/app.js` | [x] |
-| Contexto | Unidad, estado y cobertura visibles | `dashboard/index.html` | [x] |
-| Heatmap | Entidad x periodo con variacion porcentual | `dashboard/index.html` | [x] |
-| Transparencia | Tabla accesible de observaciones | `dashboard/index.html` | [x] |
+| Alcance | Poblacion total, hombres y mujeres en 32 entidades | `docs/population-migration-plan.md` | [x] |
+| Contrato | Indicador, sexo, geografia, periodo, unidad y estado | `dashboard/dashboard_spec.yaml` | [x] |
+| Datos | 96 observaciones oficiales de 2020 | `data/official/population_2020.csv` | [x] |
+| Lineage | URL, fecha de extraccion y nota metodologica | `data/official/README.md` | [x] |
+| Reconciliacion | Total igual a hombres mas mujeres por entidad | `tests/test_population_official_contract.py` | [x] |
+| Metricas | Poblacion, participacion femenina y brecha absoluta | `dashboard/app.js` | [x] |
+| Ranking | Orden mayor-menor y menor-mayor | `dashboard/index.html` | [x] |
+| Dashboard | Filtros, metricas, serie, ranking y tabla | `dashboard/index.html` | [x] |
+| Calidad | Contratos de dashboard y dataset oficial | `tests/` | [x] |
+| Smoke | Archivos, cobertura, categorias y estado oficial | `tests/smoke_dashboard.py` | [x] |
+| Portafolio | Narrativa y EDA reproducibles | `portfolio/case-study.md` | [x] |
+| Seguridad | Sin tokens, `.env`, conexion productiva ni SQLite | `README.md` | [x] |
+
+## Validacion ejecutada
+
+```text
+python -m unittest discover -s tests -p "test_*.py" -v -> 9 passed
+python tests/smoke_dashboard.py -> 96 official observations, 32 entities
+node --check dashboard/app.js -> passed
+git diff --check -> passed
+```
 
 ## Pendientes deliberados
 
 - Ejecutar E2E real de Chromium en un runner con navegador disponible.
-- Sustituir el fixture por datos reales solo después de revisar autorización,
-  metadata, cobertura y seguridad.
-- Publicar un PDF únicamente después de una revisión visual y de secretos.
+- Extender la serie a otros censos solo después de revisar comparabilidad.
+- Publicar un PDF únicamente después de revisión visual y de secretos.
 
-## Decisión
+## Decision
 
-El proyecto se acepta como MVP analítico de nivel middle inicial y queda listo
-para una siguiente iteración. No se acepta como sistema productivo ni como
-base para inferencia causal.
+El proyecto se acepta como release candidate de análisis descriptivo de nivel
+middle inicial. No se acepta como sistema productivo ni como base para
+inferencia causal.

@@ -15,7 +15,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Validate Python contracts
+        run: python -m unittest discover -s tests -p "test_*.py" -v
+      - name: Run dashboard smoke test
+        run: python tests/smoke_dashboard.py
+      - name: Check dashboard JavaScript
+        run: node --check dashboard/app.js
+
   deploy:
+    needs: quality
     runs-on: ubuntu-latest
     environment:
       name: github-pages

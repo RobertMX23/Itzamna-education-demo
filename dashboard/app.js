@@ -1,5 +1,5 @@
-const DATA_URL = "../data/synthetic/dashboard.csv";
-const state = { rows: [], indicatorId: "", entity: "all", period: "" };
+const DATA_URL = "../data/official/population_2020.csv";
+const state = { rows: [], indicatorId: "", entity: "all", period: "", sort: "desc" };
 
 const $ = (id) => document.getElementById(id);
 const formatValue = (value, unit) => `${Number(value).toLocaleString("es-MX", { maximumFractionDigits: 1 })}${unit === "percent" ? "%" : ""}`;
@@ -35,7 +35,7 @@ function aggregateByPeriod(rows) {
   });
   return [...grouped.entries()].map(([time_period, values]) => ({
     time_period,
-    value: values.reduce((sum, value) => sum + value, 0) / values.length,
+    value: values.reduce((sum, value) => sum + value, 0),
     unit: rows[0]?.unit || "",
     status: values.length === 1 ? rows[0]?.status : "aggregated"
   })).sort((a, b) => Number(a.time_period) - Number(b.time_period));
@@ -50,9 +50,37 @@ function calculatePercentChange(rows, currentPeriod) {
   return ((Number(current.value) - Number(previous.value)) / Number(previous.value)) * 100;
 }
 
+function aggregateSexValues(rows) {
+  return rows.reduce((values, row) => {
+    values[row.sex] = (values[row.sex] || 0) + Number(row.value);
+    return values;
+  }, {});
+}
+
+function calculatePopulationMetrics(period) {
+  const rows = filterByPeriod(filterByEntity(state.rows, state.entity), period);
+  const values = aggregateSexValues(rows);
+  const selectedRowsForPeriod = rows.filter((row) => row.indicator_id === state.indicatorId);
+  const selectedValue = selectedRowsForPeriod.length
+    ? selectedRowsForPeriod.reduce((sum, row) => sum + Number(row.value), 0)
+    : null;
+  const femaleShare = values.total > 0 ? (values.female / values.total) * 100 : null;
+  const genderGap = values.female !== undefined && values.male !== undefined
+    ? values.female - values.male
+    : null;
+
+  return {
+    selectedValue,
+    unit: selectedRowsForPeriod[0]?.unit || "persons",
+    femaleShare,
+    genderGap
+  };
+}
+
 function buildRanking(rows, period) {
+  const direction = state.sort === "asc" ? 1 : -1;
   return filterByPeriod(filterByIndicator(state.rows, state.indicatorId), period)
-    .sort((a, b) => Number(b.value) - Number(a.value))
+    .sort((a, b) => direction * (Number(b.value) - Number(a.value)))
     .map((row, index) => ({ ...row, calculatedRank: index + 1 }));
 }
 
@@ -105,12 +133,17 @@ function renderPeriodOptions() {
 function render() {
   const filteredRows = selectedRows();
   const rows = state.entity === "all" ? aggregateByPeriod(filteredRows) : [...filteredRows].sort((a, b) => Number(a.time_period) - Number(b.time_period));
-  const current = rows.find((row) => row.time_period === state.period) || rows.at(-1);
-  const percentChange = calculatePercentChange(rows, current?.time_period);
-  $("latest-value").textContent = current ? formatValue(current.value, current.unit) : "N/D";
-  $("latest-period").textContent = current?.time_period || "-";
-  $("period-change").textContent = percentChange === null ? "N/D" : `${percentChange.toFixed(2)}%`;
-  $("observation-count").textContent = rows.length;
+  const populationMetrics = calculatePopulationMetrics(state.period);
+  $("latest-value").textContent = populationMetrics.selectedValue === null
+    ? "N/D"
+    : formatValue(populationMetrics.selectedValue, populationMetrics.unit);
+  $("latest-period").textContent = state.period || "-";
+  $("period-change").textContent = populationMetrics.femaleShare === null
+    ? "N/D"
+    : `${populationMetrics.femaleShare.toFixed(2)}%`;
+  $("observation-count").textContent = populationMetrics.genderGap === null
+    ? "N/D"
+    : formatValue(populationMetrics.genderGap, populationMetrics.unit);
   $("series-range").textContent = rows.length ? `${rows[0].time_period}–${rows.at(-1).time_period}` : "-";
   $("ranking-period").textContent = state.period;
   const max = Math.max(...rows.map((row) => Number(row.value)), 1);
@@ -120,7 +153,7 @@ function render() {
   renderMetadata(filteredRows);
   renderObservationTable(filteredRows);
   renderHeatmap(filterByIndicator(state.rows, state.indicatorId));
-  $("status-message").textContent = rows.length ? "Datos sintéticos cargados correctamente." : "No hay observaciones para los filtros seleccionados.";
+  $("status-message").textContent = rows.length ? "Datos oficiales de INEGI cargados correctamente." : "No hay observaciones para los filtros seleccionados.";
 }
 
 async function init() {
@@ -132,6 +165,7 @@ async function init() {
     $("indicator-filter").addEventListener("change", (event) => { state.indicatorId = event.target.value; renderPeriodOptions(); render(); });
     $("entity-filter").addEventListener("change", (event) => { state.entity = event.target.value; render(); });
     $("period-filter").addEventListener("change", (event) => { state.period = event.target.value; render(); });
+    $("sort-filter").addEventListener("change", (event) => { state.sort = event.target.value; render(); });
     render();
   } catch (error) { $("status-message").textContent = `No se pudo cargar el dataset: ${error.message}`; }
 }

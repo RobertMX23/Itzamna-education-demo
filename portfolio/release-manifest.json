@@ -1,38 +1,38 @@
 {
   "project_id": "PROJECT-02",
-  "name": "education-dashboard",
-  "release": "0.1.0",
+  "name": "population-dashboard",
+  "release": "0.2.0",
   "released_on": "2026-08-02",
-  "source_type": "synthetic",
-  "status": "accepted-for-next-iteration",
+  "source_type": "official-extract",
+  "status": "ready-for-publication",
   "artifacts": [
     {
-      "path": "data/synthetic/catalog.json",
-      "sha256": "b3fb9d45ffd2a046e767b5ed2ebc8040e8f9040e7b8cda87e347ae2a8b315f2a"
+      "path": "data/official/population_2020.csv",
+      "sha256": "6bb975c0f4686fc3d55964910c49782f9d5f615e010d1fc79bab850c2c81438d"
     },
     {
-      "path": "data/synthetic/dashboard.csv",
-      "sha256": "d8ab4f6ef07a864e86e978a85217f11011295738955ce1964e5bd3e034128778"
+      "path": "dashboard/dashboard_spec.yaml",
+      "sha256": "aaf9a3996f7cd832df99b268c864cd224e35f91e8b0ae093fa1b1e8fcb948f33"
     },
     {
       "path": "dashboard/index.html",
-      "sha256": "dfd2401ad2b4f6b8a44a66eb6a7e3244f2d285a9e9415e46ea1a36f9a96d3dbc"
+      "sha256": "30248c678064bc8078bc16ee80bd5d4051bf439f6bafe4b84a6bec7ab68e9f77"
     },
     {
       "path": "dashboard/styles.css",
-      "sha256": "94b3963b6adaf903c375c2711fc7a5146da5dca5b737769fb64ad20b2b57a959"
+      "sha256": "49ca78257fcd430a58c878d63e784b7d41ee8ba0be3711e36e70074136c4ed4e"
     },
     {
       "path": "dashboard/app.js",
-      "sha256": "944f706c379c72d15b6e002b0894fc9c77b47fe0c315f4b658a418debef2c228"
+      "sha256": "a273c9f52ed40e00e5eabe22dfd1a57a56b6ae83a39dbcc7a6f7c7b4a04fc9bb"
     },
     {
       "path": "docs/acceptance-checklist.md",
-      "sha256": "618805a2af063c7f8b46b3b0ac7cdde1d03b2eb289bd1cb31e899a41c5330301"
+      "sha256": "157e17157f55a355c2ad52a3c4d3aceb3173c26d0dfc883d93a7f1e5b4c7e564"
     },
     {
       "path": "portfolio/case-study.md",
-      "sha256": "49ee0c3d0ff2654152fa67e85df53d4397d84f60bcb9ec1a050479d6f403928c"
+      "sha256": "ae98aaebaed12d8d64ebb2bc01944678ce80332a0c9384bda4bec1cd2f455c8b"
     }
   ],
   "security": {
