@@ -25,6 +25,19 @@ test.describe("Itzamna population dashboard", () => {
     await expect(page.locator("#entity-ranking li").first()).toContainText("Colima");
   });
 
+  test("switches between historical and sex composition views", async ({ page }) => {
+    await expect(page.locator("#time-series")).toBeVisible();
+    await page.locator("#chart-mode").selectOption("composition");
+    await expect(page.locator("#chart-title")).toHaveText("Composicion por sexo");
+    await expect(page.locator("#composition-chart")).toBeVisible();
+    await expect(page.locator("#time-series")).toBeHidden();
+  });
+
+  test("shows derived period variation in the observation table", async ({ page }) => {
+    await page.locator("#entity-filter").selectOption("05");
+    await expect(page.locator("#observation-table tr").nth(1)).toContainText("%");
+  });
+
   test("keeps the dashboard usable on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await expect(page.locator("main.shell")).toBeVisible();
