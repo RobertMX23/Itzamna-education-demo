@@ -183,7 +183,8 @@ function updateChartMode() {
 }
 
 function populateControls(rows) {
-  const indicators = [...new Map(rows.map((row) => [row.indicator_id, row])).values()];
+  const indicators = [...new Map(rows.map((row) => [row.indicator_id, row])).values()]
+    .sort((a, b) => ({ "POP-TOTAL": 0, "POP-MALE": 1, "POP-FEMALE": 2 }[a.indicator_id] ?? 99) - ({ "POP-TOTAL": 0, "POP-MALE": 1, "POP-FEMALE": 2 }[b.indicator_id] ?? 99));
   const entities = [...new Map(rows.map((row) => [row.geo_area, row])).values()];
   $("indicator-filter").innerHTML = indicators.map((row) => `<option value="${row.indicator_id}">${row.indicator_name}</option>`).join("");
   $("entity-filter").innerHTML = `<option value="all">Todas las entidades</option>${entities.map((row) => `<option value="${row.geo_area}">${row.geo_name}</option>`).join("")}`;

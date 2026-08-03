@@ -17,7 +17,7 @@ test.describe("Itzamna population dashboard", () => {
   test("filters one entity without losing the population metrics", async ({ page }) => {
     await page.locator("#entity-filter").selectOption("05");
     await expect(page.locator("#latest-value")).toHaveText("3,146,771");
-    await expect(page.locator("#observation-table tr")).toHaveCount(1);
+    await expect(page.locator("#observation-table tr")).toHaveCount(5);
   });
 
   test("changes ranking direction", async ({ page }) => {
