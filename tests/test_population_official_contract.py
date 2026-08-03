@@ -42,6 +42,10 @@ class OfficialPopulationContractTests(unittest.TestCase):
         self.assertTrue(all(row["extraction_date"] for row in self.rows))
         self.assertTrue(all(row["methodology_note"] for row in self.rows))
 
+    def test_utf8_labels_are_not_mojibake(self):
+        labels = " ".join(row["geo_name"] for row in self.rows)
+        self.assertNotRegex(labels, r"Ã|Â|â")
+
 
 if __name__ == "__main__":
     unittest.main()
