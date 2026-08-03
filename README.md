@@ -34,6 +34,7 @@ y no deben interpretarse como causalidad.
 - [Case study](portfolio/case-study.md)
 - [Release manifest](portfolio/release-manifest.json)
 - [Visual review](docs/visual-review.md)
+- [ECharts experiment](docs/echarts-experiment.md)
 
 ## Publication flow
 
