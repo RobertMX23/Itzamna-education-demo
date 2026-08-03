@@ -25,9 +25,9 @@ INEGI indicators: total, male and female population.
 | Element | Target state |
 |---|---|
 | Scope | 32 federal entities |
-| Periods | 1910, 1921, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 1995, 2000, 2005, 2010, 2020 |
+| Periods | 1995, 2000, 2005, 2010, 2020 |
 | Indicators | Total, male, female |
-| Rows | 1,344 observations |
+| Rows | 480 observations |
 | Grain | Entity + sex + comparable census period |
 | Source | INEGI Banco de Indicadores API v2.0 |
 | Derived metrics | Absolute change, percentage change, female share, sex gap |
@@ -37,10 +37,11 @@ INEGI indicators: total, male and female population.
 
 ## API Coverage Decision
 
-The total series contains an additional 2015 observation. Male and female do
-not contain 2015, so 2015 is excluded from the comparable three-series target
-dataset. It may be displayed only as a total-only observation in a future
-explicitly labelled view.
+The national series contains earlier periods and an additional 2015
+observation, but state-level male and female responses are not complete for
+those periods. The comparable entity-level target therefore uses only 1995,
+2000, 2005, 2010 and 2020. Earlier national periods and 2015 may be displayed
+only in a future explicitly labelled national-only view.
 
 ## Fields
 
@@ -83,10 +84,10 @@ explicitly labelled view.
 
 ## Acceptance Criteria
 
-- 1,344 rows are loaded.
+- 480 rows are loaded.
 - 32 entities are present for every comparable period.
 - Three sex categories exist for every entity-period.
-- No 2015 row is included in the three-series comparison dataset.
+- No incomplete national-only period is included in the entity comparison dataset.
 - Every entity-period satisfies `total = male + female`.
 - Historical values are traceable to the API extraction.
 - Existing 2020 dashboard behavior remains valid.
