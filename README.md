@@ -62,6 +62,17 @@ python -m http.server 8080
 
 Open `http://127.0.0.1:8080/dashboard/`.
 
+## QA checks
+
+```powershell
+python -m unittest discover -s tests -p "test_*.py" -v
+python tests/smoke_dashboard.py
+```
+
+The contract tests validate the synthetic schema, critical dashboard
+selectors and relative dataset paths. Browser scenarios are documented in
+`tests/e2e/README.md` and can be enabled in a runner with Playwright.
+
 ## Scope
 
 This is a sanitized portfolio artifact, not the private INEGI integration
