@@ -20,6 +20,9 @@ Abrir el dashboard y comprobar en 1440 px, 1024 px y 390 px:
 - El cambio de indicador conserva unidad y periodo.
 - El estado sintético es visible.
 - No aparecen tokens, rutas privadas ni datos reales.
+- La tabla conserva desplazamiento horizontal sin romper el viewport movil.
+- El mapa de calor muestra valores y no depende solo del color.
+- Unidad, estado y cobertura permanecen visibles despues de cambiar filtros.
 
 ## Paquete demo
 

@@ -51,6 +51,18 @@ visualizations:
     x: value
     y: geo_name
     rule: "Orden descendente; indicar periodo seleccionado."
+  - id: growth_heatmap
+    type: heatmap
+    title: Consistencia de crecimiento
+    rows: geo_name
+    columns: time_period
+    value: percent_change
+    rule: "Usar color como apoyo; conservar el valor porcentual visible."
+  - id: observation_table
+    type: table
+    title: Detalle de observaciones
+    columns: [geo_name, time_period, value, percent_change, status]
+    rule: "La tabla es la alternativa accesible a las visualizaciones."
   - id: relationship_note
     type: annotation
     title: Lectura metodologica
@@ -63,6 +75,7 @@ accessibility:
   - "Cada control tiene label visible y aria-label cuando sea necesario."
   - "El color no es el unico canal para comunicar estados."
   - "Los graficos incluyen titulo, periodo y unidad."
+  - "La tabla de observaciones permite leer los valores sin depender del color."
 responsive:
   desktop: "Tres metricas en fila; visualizaciones en dos columnas."
   mobile: "Una columna; filtros y visualizaciones apilados."

@@ -19,6 +19,11 @@ Estado esperado: `accepted-for-next-iteration`.
 | QA | Unit, smoke y E2E preparado | `tests/` | [x] |
 | CI | Job independiente del Proyecto 02 | `.github/workflows/ci.yml` | [x] |
 | Portafolio | Narrativa sanitizada | `portfolio/case-study.md` | [x] |
+| Semantica | La seleccion individual no mezcla entidades | `dashboard/app.js` | [x] |
+| Comparacion | El ranking usa indicador y periodo seleccionados | `dashboard/app.js` | [x] |
+| Contexto | Unidad, estado y cobertura visibles | `dashboard/index.html` | [x] |
+| Heatmap | Entidad x periodo con variacion porcentual | `dashboard/index.html` | [x] |
+| Transparencia | Tabla accesible de observaciones | `dashboard/index.html` | [x] |
 
 ## Pendientes deliberados
 
