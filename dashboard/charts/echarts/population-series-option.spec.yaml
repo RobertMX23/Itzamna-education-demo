@@ -1,0 +1,12 @@
+version: "1.0"
+title: "ECharts historical population series"
+chart:
+  type: line
+  series: [total, male, female]
+  dimensions: [period, entity, sex, value, geo_name]
+  interactions: [tooltip, legend, dataZoom]
+visual_rules:
+  - "The y-axis unit is persons."
+  - "All series share the same scale."
+  - "Colors are supplemented by labels and decals."
+  - "The chart remains descriptive and does not imply causality."
