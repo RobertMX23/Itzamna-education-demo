@@ -3,7 +3,8 @@ import { parsePopulationCsv } from "./population-lab-data.js";
 import { toHistoricalDataset } from "./population-adapter.js";
 import { buildComparisonOption } from "./population-comparison-option.js";
 
-const DATA_URL = "../../../data/official/population_historical.csv";
+// Resolve from the HTML document so project Pages paths remain intact.
+const DATA_URL = "../data/official/population_historical.csv";
 const firstSelect = document.getElementById("echarts-first-entity");
 const secondSelect = document.getElementById("echarts-second-entity");
 const status = document.getElementById("echarts-status");
