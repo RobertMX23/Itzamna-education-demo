@@ -83,6 +83,7 @@ The contract tests validate the official schema, 32-entity population
 reconciliation, critical dashboard selectors and relative dataset paths.
 Browser scenarios are documented in
 `tests/e2e/README.md` and can be enabled in a runner with Playwright.
+The public browser gate covers Chromium, Firefox and WebKit.
 
 ## Scope
 

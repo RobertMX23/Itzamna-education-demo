@@ -44,10 +44,12 @@ jobs:
           cache: npm
       - name: Install browser test dependencies
         run: npm install
-      - name: Install Chromium for ECharts acceptance tests
-        run: npx playwright install --with-deps chromium
+      - name: Install browsers for cross-browser acceptance tests
+        run: npx playwright install --with-deps chromium firefox webkit
       - name: Run ECharts acceptance tests
         run: npm run test:e2e:echarts
+      - name: Run public cross-browser acceptance tests
+        run: npm run test:e2e -- --project=chromium --project=firefox --project=webkit
 
   deploy:
     needs: quality
