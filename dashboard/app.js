@@ -2,6 +2,8 @@ const DATA_URL = "../data/official/population_2020.csv";
 const state = { rows: [], indicatorId: "", entity: "all", period: "", sort: "desc" };
 
 const $ = (id) => document.getElementById(id);
+const UNIT_LABELS = { persons: "personas", percent: "%" };
+const formatUnitLabel = (unit) => UNIT_LABELS[unit] || unit || "N/D";
 const formatValue = (value, unit) => `${Number(value).toLocaleString("es-MX", { maximumFractionDigits: 1 })}${unit === "percent" ? "%" : ""}`;
 
 function parseCsv(text) {
@@ -115,7 +117,7 @@ function buildRanking(rows, period) {
 function renderMetadata(rows) {
   const first = rows[0];
   const entities = new Set(rows.map((row) => row.geo_area));
-  $("indicator-unit").textContent = first?.unit || "N/D";
+  $("indicator-unit").textContent = formatUnitLabel(first?.unit);
   $("data-status").textContent = first?.status || "N/D";
   $("data-coverage").textContent = `${entities.size} entidad(es)`;
 }

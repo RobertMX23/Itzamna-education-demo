@@ -61,6 +61,9 @@ class DashboardContractTests(unittest.TestCase):
         self.assertIn('"../data/official/population_2020.csv"', self.app)
         self.assertNotRegex(self.app, r"(?:C:|/home/|https?://).*(?:csv|json)")
 
+    def test_app_localizes_unit_labels(self):
+        self.assertIn('persons: "personas"', self.app)
+
     def test_app_has_separate_filter_and_metric_functions(self):
         for function_name in (
             "filterByIndicator",
