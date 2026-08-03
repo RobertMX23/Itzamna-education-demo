@@ -69,6 +69,18 @@ test.describe("Itzamna ECharts comparison lab", () => {
     );
   });
 
+  test("keeps the laboratory accessible to keyboard and assistive technology users", async ({ page }) => {
+    await page.goto("dashboard/echarts-lab.html");
+    await expect(page.locator("main.echarts-lab")).toHaveAttribute("aria-label", "Laboratorio ECharts");
+    await expect(page.locator("h1")).toBeVisible();
+    await expect(page.locator("h2")).toHaveText("Serie comparativa");
+    await expect(page.locator("#echarts-status")).toHaveAttribute("aria-live", "polite");
+    await page.locator("#echarts-first-entity").focus();
+    await expect(page.locator("#echarts-first-entity")).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(page.locator("#echarts-second-entity")).toBeFocused();
+  });
+
   test("keeps chart labels semantic and free of invalid values", async ({ page }) => {
     await page.goto("dashboard/echarts-lab.html");
     const chart = page.locator("#echarts-comparison");
