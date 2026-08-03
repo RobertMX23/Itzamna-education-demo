@@ -29,6 +29,8 @@ jobs:
         run: python -m unittest discover -s tests -p "test_*.py" -v
       - name: Run dashboard smoke test
         run: python tests/smoke_dashboard.py
+      - name: Validate approved public dataset
+        run: python scripts/validate_public_dataset.py
       - name: Check dashboard JavaScript
         run: node --check dashboard/app.js
       - name: Set up Node.js
