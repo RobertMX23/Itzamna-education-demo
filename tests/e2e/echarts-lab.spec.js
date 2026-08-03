@@ -9,6 +9,9 @@ test.describe("Itzamna ECharts comparison lab", () => {
     await expect(page.locator("#echarts-comparison")).toBeVisible();
     await expect(page.locator("label[for='echarts-first-entity']")).toBeVisible();
     await expect(page.locator("#echarts-status")).toHaveAttribute("role", "status");
+    const desktopChart = await page.locator("#echarts-comparison").boundingBox();
+    expect(desktopChart.width).toBeGreaterThan(0);
+    expect(desktopChart.height).toBeGreaterThan(300);
   });
 
   test("updates the comparison when the second entity changes", async ({ page }) => {
@@ -28,7 +31,10 @@ test.describe("Itzamna ECharts comparison lab", () => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("dashboard/echarts-lab.html");
     const toolbarBounds = await page.locator(".echarts-toolbar").boundingBox();
+    const mobileChart = await page.locator("#echarts-comparison").boundingBox();
     expect(toolbarBounds.width).toBeLessThanOrEqual(390);
+    expect(mobileChart.width).toBeLessThanOrEqual(toolbarBounds.width);
+    expect(mobileChart.height).toBeGreaterThan(300);
     await expect(page.locator(".echarts-toolbar")).toHaveCSS("grid-template-columns", /px/);
     await expect(page.locator("#echarts-comparison")).toBeVisible();
   });
