@@ -13,7 +13,7 @@
         <p class="eyebrow">ITZAMNA / PROJECT 02</p>
         <h1>Population dashboard</h1>
         <p class="lede">Compara poblacion total, hombres y mujeres por entidad.</p>
-        <p class="notice">Fuente oficial: INEGI, Censo de Población y Vivienda 2020.</p>
+        <p class="notice">Fuente oficial: INEGI, Censo de Poblacion y Vivienda 2020. Serie comparable 1995-2020.</p>
       </header>
 
       <section class="toolbar" aria-label="Filtros del dashboard">
@@ -32,6 +32,12 @@
             <option value="asc">Menor a mayor</option>
           </select>
         </label>
+        <label>Visualizacion
+          <select id="chart-mode" aria-label="Seleccionar visualizacion">
+            <option value="trend">Serie historica</option>
+            <option value="composition">Composicion por sexo</option>
+          </select>
+        </label>
       </section>
 
       <section class="metrics" aria-label="Métricas principales">
@@ -48,8 +54,9 @@
 
       <section class="visual-grid" aria-label="Visualizaciones demograficas">
         <article class="panel">
-          <div class="panel-heading"><h2>Serie temporal</h2><span id="series-range">-</span></div>
+          <div class="panel-heading"><h2 id="chart-title">Serie historica</h2><span id="series-range">-</span></div>
           <div id="time-series" class="chart" role="img" aria-label="Serie temporal del indicador seleccionado"></div>
+          <div id="composition-chart" class="chart composition-chart" role="img" aria-label="Composicion de poblacion por sexo"></div>
         </article>
         <article class="panel">
           <div class="panel-heading"><h2>Ranking territorial</h2><span id="ranking-period">-</span></div>

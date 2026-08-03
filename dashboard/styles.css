@@ -19,7 +19,7 @@ h1 { font-size: clamp(3rem, 7vw, 7rem); letter-spacing: -.06em; }
 .lede { align-self: end; color: var(--muted); margin: 0; max-width: 32rem; }
 .notice { grid-column: 1 / -1; color: var(--muted); margin: 8px 0 0; font-size: .9rem; }
 .toolbar, .metrics, .visual-grid { display: grid; gap: var(--space); margin-top: var(--space); }
-.toolbar { grid-template-columns: repeat(3, 1fr); }
+.toolbar { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 label { color: var(--muted); font-size: .85rem; font-weight: 700; }
 select { display: block; width: 100%; margin-top: 6px; padding: 12px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font: inherit; }
 .metrics { grid-template-columns: repeat(3, 1fr); }
@@ -30,6 +30,16 @@ select { display: block; width: 100%; margin-top: 6px; padding: 12px; border: 1p
 .panel-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
 h2 { font-size: clamp(1.6rem, 3vw, 2.7rem); }
 .chart { display: flex; align-items: end; gap: 10px; min-height: 260px; padding-top: 32px; border-bottom: 1px solid var(--line); }
+.chart-svg { display: block; width: 100%; min-height: 260px; overflow: visible; }
+.chart-svg text { fill: var(--muted); font: 12px system-ui, sans-serif; }
+.composition-chart { display: block; padding: 48px 0 18px; }
+.composition-item { margin: 28px 0; }
+.composition-label { display: flex; justify-content: space-between; gap: 16px; color: var(--muted); }
+.composition-label strong { color: var(--ink); }
+.composition-track { height: 26px; margin-top: 10px; background: #e6eeeb; }
+.composition-fill { display: block; height: 100%; min-width: 2px; }
+.composition-fill.male { background: var(--accent); }
+.composition-fill.female { background: #6d9b8a; }
 .bar-item { display: flex; flex: 1; min-width: 34px; height: 100%; align-items: end; justify-content: center; position: relative; }
 .bar { width: min(70px, 80%); min-height: 3px; background: var(--bar); }
 .bar-label { position: absolute; bottom: -28px; color: var(--muted); font-size: .75rem; }
@@ -53,4 +63,5 @@ table { width: 100%; border-collapse: collapse; min-width: 620px; }
 th, td { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: left; }
 th { color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; }
 footer { border-top: 1px solid var(--line); color: var(--muted); margin-top: var(--space); padding-top: 16px; font-size: .85rem; }
+@media (max-width: 1100px) { .toolbar { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 720px) { .page-header, .toolbar, .metrics, .visual-grid { grid-template-columns: 1fr; } .lede { max-width: none; } h1 { font-size: clamp(3rem, 16vw, 5rem); } }

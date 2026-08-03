@@ -23,6 +23,11 @@ filters:
     required: true
     allowed: [desc, asc]
     behavior: "Ordenar el ranking territorial de mayor a menor o de menor a mayor."
+  - id: chart_mode
+    label: Visualizacion
+    required: true
+    allowed: [trend, composition]
+    behavior: "Alternar serie historica por sexo y composicion del periodo seleccionado."
 analysis_modes:
   individual:
     label: "Entidad seleccionada"
@@ -50,11 +55,18 @@ metrics:
     source: "count(distinct geo_area)"
 visualizations:
   - id: time_series
-    type: bar
-    title: Serie temporal
+    type: multi_line
+    title: Serie historica
     x: time_period
     y: value
-    rule: "No mezclar indicadores ni unidades en una misma escala."
+    series: [total, male, female]
+    rule: "Comparar los cinco periodos estatales comunes; no interpretar la linea como causalidad."
+  - id: sex_composition
+    type: horizontal_bar
+    title: Composicion por sexo
+    x: value
+    y: sex
+    rule: "Mostrar hombres y mujeres para el periodo seleccionado, conservando unidad personas."
   - id: entity_ranking
     type: horizontal_bar
     title: Ranking territorial
@@ -80,7 +92,7 @@ visualizations:
 states:
   empty: "No hay observaciones para los filtros seleccionados."
   incomplete: "La cobertura disponible no permite una comparacion completa."
-  official: "Datos oficiales de INEGI, Censo de Poblacion y Vivienda 2020."
+  official: "Datos oficiales de INEGI; serie estatal comparable 1995, 2000, 2005, 2010 y 2020."
 accessibility:
   - "Cada control tiene label visible y aria-label cuando sea necesario."
   - "El color no es el unico canal para comunicar estados."

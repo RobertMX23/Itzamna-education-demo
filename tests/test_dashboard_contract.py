@@ -58,11 +58,17 @@ class DashboardContractTests(unittest.TestCase):
         self.assertIn("Fuente oficial: INEGI", self.html)
 
     def test_app_uses_relative_dataset_reference(self):
-        self.assertIn('"../data/official/population_2020.csv"', self.app)
+        self.assertIn('"../data/official/population_historical.csv"', self.app)
         self.assertNotRegex(self.app, r"(?:C:|/home/|https?://).*(?:csv|json)")
 
     def test_app_localizes_unit_labels(self):
         self.assertIn('persons: "personas"', self.app)
+
+    def test_html_exposes_historical_visualization_mode(self):
+        self.assertIn('id="chart-mode"', self.html)
+        self.assertIn('value="composition"', self.html)
+        self.assertIn('function renderHistoricalChart', self.app)
+        self.assertIn('function renderCompositionChart', self.app)
 
     def test_app_has_separate_filter_and_metric_functions(self):
         for function_name in (

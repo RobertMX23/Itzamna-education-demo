@@ -1,5 +1,5 @@
-const DATA_URL = "../data/official/population_2020.csv";
-const state = { rows: [], indicatorId: "", entity: "all", period: "", sort: "desc" };
+const DATA_URL = "../data/official/population_historical.csv";
+const state = { rows: [], indicatorId: "", entity: "all", period: "", sort: "desc", chartMode: "trend" };
 
 const $ = (id) => document.getElementById(id);
 const UNIT_LABELS = { persons: "personas", percent: "%" };
@@ -143,6 +143,45 @@ function renderHeatmap(rows) {
   $("growth-heatmap").innerHTML = header + body;
 }
 
+function renderHistoricalChart(rows) {
+  const periods = [...new Set(rows.map((row) => row.time_period))].sort((a, b) => Number(a) - Number(b));
+  const series = ["total", "male", "female"].map((sex) => ({
+    sex,
+    values: periods.map((period) => rows.filter((row) => row.time_period === period && row.sex === sex)
+      .reduce((sum, row) => sum + Number(row.value), 0))
+  }));
+  const max = Math.max(...series.flatMap((item) => item.values), 1);
+  const width = 760;
+  const height = 270;
+  const left = 48;
+  const top = 24;
+  const chartWidth = width - left - 18;
+  const chartHeight = height - top - 44;
+  const colors = { total: "#17324a", male: "#c75d3e", female: "#6d9b8a" };
+  const labels = { total: "Total", male: "Hombres", female: "Mujeres" };
+  const x = (index) => left + (periods.length === 1 ? chartWidth / 2 : (index / (periods.length - 1)) * chartWidth);
+  const y = (value) => top + chartHeight - (value / max) * chartHeight;
+  const lines = series.map((item) => `<polyline points="${item.values.map((value, index) => `${x(index)},${y(value)}`).join(" ")}" fill="none" stroke="${colors[item.sex]}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`).join("");
+  const points = series.map((item) => item.values.map((value, index) => `<circle cx="${x(index)}" cy="${y(value)}" r="4" fill="${colors[item.sex]}"/>`).join("")).join("");
+  const ticks = periods.map((period, index) => `<text x="${x(index)}" y="${height - 12}" text-anchor="middle">${period}</text>`).join("");
+  const legend = series.map((item, index) => `<text x="${left + index * 150}" y="14" fill="${colors[item.sex]}">${labels[item.sex]}</text>`).join("");
+  $("time-series").innerHTML = `<svg class="chart-svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Serie historica de poblacion por sexo">${legend}<line x1="${left}" y1="${top + chartHeight}" x2="${left + chartWidth}" y2="${top + chartHeight}" stroke="#cbd9d5"/>${lines}${points}${ticks}</svg>`;
+}
+
+function renderCompositionChart(rows) {
+  const values = aggregateSexValues(filterByPeriod(rows, state.period));
+  const items = [{ sex: "male", label: "Hombres", value: values.male || 0 }, { sex: "female", label: "Mujeres", value: values.female || 0 }];
+  const max = Math.max(...items.map((item) => item.value), 1);
+  $("composition-chart").innerHTML = items.map((item) => `<div class="composition-item"><div class="composition-label"><span>${item.label}</span><strong>${formatValue(item.value, "persons")}</strong></div><div class="composition-track"><span class="composition-fill ${item.sex}" style="width:${item.value / max * 100}%"></span></div></div>`).join("");
+}
+
+function updateChartMode() {
+  const trend = state.chartMode === "trend";
+  $("time-series").hidden = !trend;
+  $("composition-chart").hidden = trend;
+  $("chart-title").textContent = trend ? "Serie historica" : "Composicion por sexo";
+}
+
 function populateControls(rows) {
   const indicators = [...new Map(rows.map((row) => [row.indicator_id, row])).values()];
   const entities = [...new Map(rows.map((row) => [row.geo_area, row])).values()];
@@ -174,10 +213,12 @@ function render() {
   $("observation-count").textContent = populationMetrics.genderGap === null
     ? "N/D"
     : formatValue(populationMetrics.genderGap, populationMetrics.unit);
-  $("series-range").textContent = rows.length ? `${rows[0].time_period}–${rows.at(-1).time_period}` : "-";
+  $("series-range").textContent = rows.length ? `${rows[0].time_period}-${rows.at(-1).time_period}` : "-";
   $("ranking-period").textContent = state.period;
-  const max = Math.max(...rows.map((row) => Number(row.value)), 1);
-  $("time-series").innerHTML = rows.map((row) => `<div class="bar-item"><div class="bar" style="height:${Number(row.value) / max * 88}%" title="${formatValue(row.value, row.unit)}"></div><span class="bar-label">${row.time_period}</span></div>`).join("");
+  const historicalRows = filterByEntity(state.rows, state.entity);
+  renderHistoricalChart(historicalRows);
+  renderCompositionChart(historicalRows);
+  updateChartMode();
   const ranking = buildRanking(state.rows, state.period);
   $("entity-ranking").innerHTML = ranking.map((row) => `<li><span>${row.geo_name}</span><strong>${formatValue(row.value, row.unit)}</strong></li>`).join("");
   renderMetadata(filteredRows);
@@ -196,6 +237,7 @@ async function init() {
     $("entity-filter").addEventListener("change", (event) => { state.entity = event.target.value; render(); });
     $("period-filter").addEventListener("change", (event) => { state.period = event.target.value; render(); });
     $("sort-filter").addEventListener("change", (event) => { state.sort = event.target.value; render(); });
+    $("chart-mode").addEventListener("change", (event) => { state.chartMode = event.target.value; updateChartMode(); });
     render();
   } catch (error) { $("status-message").textContent = `No se pudo cargar el dataset: ${error.message}`; }
 }
