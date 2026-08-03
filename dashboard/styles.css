@@ -10,6 +10,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 body { margin: 0; background: var(--canvas); color: var(--ink); font: 16px/1.45 system-ui, sans-serif; }
 .shell { width: min(1500px, calc(100% - 32px)); margin: auto; padding: clamp(24px, 4vw, 64px) 0 32px; }
 .page-header { display: grid; grid-template-columns: 1fr auto; gap: 8px var(--space); border-bottom: 1px solid var(--line); padding-bottom: var(--space); }
