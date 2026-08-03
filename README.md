@@ -76,6 +76,7 @@ python -m unittest discover -s tests -p "test_*.py" -v
 python tests/smoke_dashboard.py
 python scripts/validate_public_dataset.py
 python scripts/check_publication_boundary.py
+python scripts/check_performance_budget.py
 ```
 
 The contract tests validate the official schema, 32-entity population

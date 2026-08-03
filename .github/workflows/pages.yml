@@ -33,6 +33,8 @@ jobs:
         run: python scripts/validate_public_dataset.py
       - name: Check publication security boundary
         run: python scripts/check_publication_boundary.py
+      - name: Check static performance budgets
+        run: python scripts/check_performance_budget.py
       - name: Check dashboard JavaScript
         run: node --check dashboard/app.js
       - name: Set up Node.js
