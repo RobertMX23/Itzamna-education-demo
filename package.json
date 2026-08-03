@@ -4,6 +4,7 @@
   "version": "0.2.0",
   "description": "Browser acceptance tests for the Itzamna population dashboard.",
   "scripts": {
+    "test": "npm run test:e2e",
     "test:e2e": "playwright test",
     "test:e2e:echarts": "playwright test --config=playwright.echarts.config.js"
   },

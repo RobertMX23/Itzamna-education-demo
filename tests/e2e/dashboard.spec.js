@@ -14,6 +14,14 @@ test.describe("Itzamna population dashboard", () => {
     await expect(page.locator("#period-change")).not.toHaveText("N/D");
   });
 
+  test("links to the isolated ECharts experiment without replacing the stable dashboard", async ({ page }) => {
+    const link = page.getByRole("link", { name: "Abrir laboratorio ECharts" });
+    await expect(link).toHaveAttribute("href", "echarts-lab.html");
+    await link.click();
+    await expect(page).toHaveURL(/dashboard\/echarts-lab\.html$/);
+    await expect(page.locator("#echarts-comparison svg")).toBeVisible();
+  });
+
   test("filters one entity without losing the population metrics", async ({ page }) => {
     await page.locator("#entity-filter").selectOption("05");
     await expect(page.locator("#latest-value")).toHaveText("3,146,771");

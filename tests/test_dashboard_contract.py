@@ -56,6 +56,7 @@ class DashboardContractTests(unittest.TestCase):
         for label in ("Poblacion seleccionada", "Participacion femenina", "Brecha mujeres-hombres"):
             self.assertIn(label, self.html)
         self.assertIn("Fuente oficial: INEGI", self.html)
+        self.assertIn('href="echarts-lab.html"', self.html)
 
     def test_app_uses_relative_dataset_reference(self):
         self.assertIn('"../data/official/population_historical.csv"', self.app)

@@ -19,6 +19,8 @@ h1, h2 { font-family: Georgia, serif; line-height: .95; margin: 0; }
 h1 { font-size: clamp(3rem, 7vw, 7rem); letter-spacing: -.06em; }
 .lede { align-self: end; color: var(--muted); margin: 0; max-width: 32rem; }
 .notice { grid-column: 1 / -1; color: var(--muted); margin: 8px 0 0; font-size: .9rem; }
+.experiment-nav { grid-column: 1 / -1; margin-top: 4px; }
+.experiment-nav a { color: var(--ink); font-size: .85rem; font-weight: 700; text-underline-offset: 4px; }
 .toolbar, .metrics, .visual-grid { display: grid; gap: var(--space); margin-top: var(--space); }
 .toolbar { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 label { color: var(--muted); font-size: .85rem; font-weight: 700; }
