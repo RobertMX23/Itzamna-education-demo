@@ -12,6 +12,7 @@ REQUIRED_FILES = (
     ROOT / "dashboard" / "styles.css",
     ROOT / "dashboard" / "app.js",
     ROOT / "data" / "official" / "population_2020.csv",
+    ROOT / "data" / "official" / "population_historical.csv",
 )
 
 
@@ -41,7 +42,18 @@ def main() -> int:
         print("FAIL dataset contains non-official status values")
         return 1
 
-    print(f"PASS dashboard package: {len(rows)} official observations, {len(entities)} entities")
+    historical_path = ROOT / "data" / "official" / "population_historical.csv"
+    with historical_path.open(newline="", encoding="utf-8-sig") as handle:
+        historical_rows = list(csv.DictReader(handle))
+    historical_periods = {row["time_period"] for row in historical_rows}
+    if len(historical_rows) != 480 or len({row["geo_area"] for row in historical_rows}) != 32:
+        print("FAIL historical dataset does not match the 480-row smoke contract")
+        return 1
+    if historical_periods != {"1995", "2000", "2005", "2010", "2020"}:
+        print("FAIL historical dataset has an unexpected period set")
+        return 1
+
+    print(f"PASS dashboard package: {len(rows)} current + {len(historical_rows)} historical observations")
     return 0
 
 
