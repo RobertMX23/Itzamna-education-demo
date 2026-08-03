@@ -18,16 +18,16 @@
       </header>
 
       <section class="echarts-toolbar" aria-label="Filtros del prototipo ECharts">
-        <label>Entidad principal
+        <label for="echarts-first-entity">Entidad principal
           <select id="echarts-first-entity" aria-label="Seleccionar entidad principal"></select>
         </label>
-        <label>Entidad comparativa
+        <label for="echarts-second-entity">Entidad comparativa
           <select id="echarts-second-entity" aria-label="Seleccionar entidad comparativa"></select>
         </label>
       </section>
 
       <section class="panel echarts-panel" aria-label="Comparacion ECharts">
-        <div class="panel-heading"><h2>Serie comparativa</h2><span id="echarts-status">Cargando...</span></div>
+        <div class="panel-heading"><h2>Serie comparativa</h2><span id="echarts-status" role="status" aria-live="polite">Cargando...</span></div>
         <div id="echarts-comparison" class="echarts-container" role="img" aria-label="Comparacion historica de dos entidades"></div>
       </section>
     </main>
