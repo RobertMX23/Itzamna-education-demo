@@ -14,6 +14,8 @@ Project 02. Do not replace the stable SVG dashboard in `main` yet.
 - The chart bundle is local and does not depend on a CDN.
 - Two-entity comparison, three sex series, responsive layout and keyboard
   access are covered by automated tests.
+- The ECharts visual review is configured for Chromium, Firefox and WebKit;
+  CI owns the browser lifecycle and is the authoritative cross-browser run.
 
 ## Why this is not a full production promotion
 
@@ -30,7 +32,8 @@ approved:
 
 1. A documented data refresh contract exists.
 2. Official API integration is tested outside the public repository.
-3. Visual regression evidence covers desktop, tablet and mobile.
+3. Visual regression evidence covers desktop, tablet and mobile across the
+   supported browser engines.
 4. Performance budgets are measured with the final dataset size.
 5. Accessibility review is completed with keyboard and screen-reader checks.
 6. A rollback path to the SVG dashboard is rehearsed.
@@ -49,4 +52,3 @@ Scope: Project 02 demo only.
 
 Next review: after the live-data adapter and cross-browser visual baseline are
 implemented.
-

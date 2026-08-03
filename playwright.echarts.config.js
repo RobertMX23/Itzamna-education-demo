@@ -8,6 +8,11 @@ module.exports = defineConfig({
     baseURL: "http://127.0.0.1:8081/",
     ...devices["Desktop Chrome"]
   },
+  projects: [
+    { name: "chromium", use: { ...devices["Desktop Chrome"] } },
+    { name: "firefox", use: { ...devices["Desktop Firefox"] } },
+    { name: "webkit", use: { ...devices["Desktop Safari"] } }
+  ],
   webServer: {
     command: "python -m http.server 8081",
     url: "http://127.0.0.1:8081/",
