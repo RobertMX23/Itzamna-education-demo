@@ -65,7 +65,7 @@ test.describe("Itzamna ECharts comparison lab", () => {
     await expect(second).toHaveAttribute("aria-label", "Seleccionar entidad comparativa");
     await expect(page.locator("#echarts-comparison")).toHaveAttribute(
       "aria-label",
-      /Comparacion entre entidades/
+      /Comparación histórica de dos entidades/
     );
   });
 });
